@@ -1,0 +1,44 @@
+body {
+  padding: 1em;
+}
+
+.local-row {
+  display: grid;
+  grid-template-columns: 50px auto 160px 180px;
+  grid-gap: 1em;
+  margin-bottom: 1rem;
+}
+
+.local-title {
+  height: 26px;
+  color: grey;
+}
+
+.local-round {
+  align-self: center;
+  justify-self: center;
+}
+
+.local-flags {
+  display: flex;
+  gap: 16px;
+  align-self: center;
+  justify-self: center;
+}
+
+.local-new button {
+  margin: 0 auto;
+  display: block;
+}
+
+/* overrides */
+.pure-form select[disabled] {
+  opacity: 1;
+  color: #626a6b;
+}
+
+.pure-control-group {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 2rem;
+}
