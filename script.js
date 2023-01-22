@@ -33,16 +33,16 @@ function addNewRound() {
     <div class="local-round">${++currentRound}</div>
     <input class="case" type="number" />
     <select class="movement">
-        <option></option>
-        <option>Standing Still</option>
-        <option>Sneaking</option>
-        <option>Walking</option>
-        <option>Running</option>
+      <option></option>
+      <option>Standing Still</option>
+      <option>Sneaking</option>
+      <option>Walking</option>
+      <option>Running</option>
     </select>
-    <select class="event">
-        <option></option>
-        <option>Key</option>
-        <option>Secret wish</option>
+    <select>
+      <option></option>
+      <option>Key</option>
+      <option>Secret wish</option>
     </select>
   `;
 

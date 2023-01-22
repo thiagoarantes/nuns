@@ -32,13 +32,13 @@
           <option>Theresa</option>
         </select>
       </div>
-      <div class="local-row local-title">
-        <div>Round</div>
-        <div>End case</div>
-        <div>Movement</div>
-        <div>Event</div>
-      </div>
       <div class="local-rows">
+        <div class="local-row local-title">
+          <div>Round</div>
+          <div>End case</div>
+          <div>Movement</div>
+          <div>Event</div>
+        </div>
         <div class="local-row">
           <div class="local-round">1</div>
           <input class="case" type="number" />
@@ -49,7 +49,7 @@
             <option>Walking</option>
             <option>Running</option>
           </select>
-          <select class="event">
+          <select>
             <option></option>
             <option>Key</option>
             <option>Secret wish</option>
@@ -58,7 +58,7 @@
       </div>
       <div class="local-new">
         <button
-          type="submit"
+          type="button"
           class="pure-button pure-button-primary"
           onclick="addNewRound()"
         >
