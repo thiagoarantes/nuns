@@ -47,8 +47,10 @@ function addNewRound() {
   `;
 
   if (currentRound === 15) {
+    objButton.innerHTML = "No more turns";
     objButton.setAttribute("disabled", true);
   }
 
+  objButton.innerHTML = `Start next turn [ ${currentRound + 1} ]`;
   objForm.append(newRow);
 }
