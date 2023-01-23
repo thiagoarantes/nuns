@@ -1,10 +1,10 @@
 * {
   font-family: "Roboto", sans-serif;
+  transition: ease-out 0.4s all;
 }
 
 body {
   padding: 0;
-  background-color: #cecece;
   margin: 0;
 }
 
@@ -85,10 +85,12 @@ button {
 @media only screen and (min-width: 768px) {
   body {
     padding: 1em 0;
+    background-color: #cecece;
   }
 
   .pure-form {
     border-radius: 12px;
     padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 }
