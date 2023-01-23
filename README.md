@@ -1,2 +1,3 @@
-# nuns
-Sheet for Nuns on the Run board game
+# Nuns on the run web sheet
+
+- https://thiagoarantes.github.io/nuns/
