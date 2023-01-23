@@ -3,20 +3,22 @@
 }
 
 body {
-  padding: 1em 0;
+  padding: 0;
   background-color: #cecece;
+  margin: 0;
 }
 
 .local-row {
   display: grid;
-  grid-template-columns: 50px auto 132px 120px;
-  grid-gap: 1em;
+  grid-template-columns: 20px minmax(60px, auto) 60px 65px;
+  grid-gap: 0.5em;
   margin-bottom: 1rem;
 }
 
 .local-title {
   height: 26px;
   color: grey;
+  align-items: center;
 }
 
 .local-round {
@@ -59,8 +61,9 @@ button {
 }
 
 .pure-form {
-  max-width: 700px;
-  padding: 1em;
+  box-sizing: border-box;
+  max-width: 768px;
+  padding: 1em 0.5em;
   margin: 0 auto;
   background-color: white;
 }
@@ -77,4 +80,15 @@ button {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    padding: 1em 0;
+  }
+
+  .pure-form {
+    border-radius: 12px;
+    padding: 1em;
+  }
 }
