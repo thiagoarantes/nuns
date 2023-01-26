@@ -22,14 +22,14 @@
     <form class="pure-form">
       <div class="pure-control-group">
         <label for="aligned-name" class="local-title">Nun's name</label>
-        <select class="nun">
-          <option></option>
-          <option>Angelica</option>
-          <option>Ann Marie</option>
-          <option>Bernadette</option>
-          <option>Celeste</option>
-          <option>Margaret</option>
-          <option>Theresa</option>
+        <select class="nun" onchange="setNunName(this.value)">
+          <option value=""></option>
+          <option value="Angelica">Angelica</option>
+          <option value="Ann Marie">Ann Marie</option>
+          <option value="Bernadette">Bernadette</option>
+          <option value="Celeste">Celeste</option>
+          <option value="Margaret">Margaret</option>
+          <option value="Theresa">Theresa</option>
         </select>
       </div>
       <div class="local-rows">
@@ -39,32 +39,31 @@
           <div>Mvmt</div>
           <div>Event</div>
         </div>
-        <div class="local-row">
-          <div class="local-round">1</div>
-          <input class="case" type="number" />
-          <select class="movement">
-            <option></option>
-            <option>SS</option>
-            <option>S</option>
-            <option>W</option>
-            <option>R</option>
-          </select>
-          <select>
-            <option></option>
-            <option>K</option>
-            <option>SW</option>
-          </select>
-        </div>
       </div>
-      <div class="local-new">
-        <button
-          type="button"
-          class="pure-button pure-button-primary"
-          onclick="addNewRound()"
-        >
-          Start next turn [ 2 ]
+      <div class="local-buttons">
+        <button type="button" class="pure-button" onclick="addNewRound()">
+          Next
+        </button>
+        <button type="button" class="reset-button" onclick="openModal()">
+          Reset Game
         </button>
       </div>
     </form>
+    <!-- Reset Modal -->
+    <div class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Are you sure you want to reset the game?</p>
+        <p>
+          <button type="button" class="pure-button" onclick="closeModal()">
+            No
+          </button>
+          <button type="button" class="reset-button" onclick="resetGame()">
+            Yes
+          </button>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
