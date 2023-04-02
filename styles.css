@@ -1,3 +1,13 @@
+:root {
+  --white: #fff;
+  --main-color: grey;
+  --secondary-color: #717b7c;
+  --main-action: dodgerblue;
+  --secondary-action: #125393;
+  --radius: 4px;
+  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   transition: ease-out 0.4s all;
@@ -6,6 +16,17 @@
 body {
   padding: 0;
   margin: 0;
+}
+
+.pure-control-group,
+.local-rows,
+.local-buttons {
+  padding: 1rem;
+}
+
+.pure-control-group,
+.local-rows {
+  border-bottom: 1px solid #cecece;
 }
 
 .local-row {
@@ -17,7 +38,7 @@ body {
 
 .local-title {
   height: 26px;
-  color: grey;
+  color: var(--main-color);
   align-items: center;
 }
 
@@ -45,15 +66,15 @@ input[type="number"] {
 
 input[type="number"],
 select {
-  border: 1px solid #999999;
-  border-radius: 4px;
+  border: 1px solid var(--main-color);
+  border-radius: var(--radius);
   padding: 8px;
   font-size: 1rem;
 }
 
 button.pure-button {
-  background-color: dodgerblue;
-  color: white;
+  background-color: var(--main-action);
+  color: var(--white);
   padding: 8px 16px;
   border-radius: 4px;
   border: none;
@@ -61,41 +82,39 @@ button.pure-button {
 }
 
 button.pure-button:hover {
-  background-color: #125393;
+  background-color: var(--secondary-action);
   cursor: pointer;
 }
 
 button.reset-button {
-  background-color: white;
-  color: dodgerblue;
+  background-color: var(--white);
+  color: var(--main-action);
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   border: none;
   font-size: 1rem;
 }
 
 button.reset-button:hover {
-  color: #125393;
+  color: var(--secondary-action);
   cursor: pointer;
 }
 
 .pure-form {
   box-sizing: border-box;
   max-width: 768px;
-  padding: 1em 0.5em;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--white);
 }
 
 .pure-form input[disabled],
 .pure-form select[disabled] {
   opacity: 1;
-  color: #717b7c;
+  color: var(--secondary-color);
   background-color: #ececec;
 }
 
 .pure-control-group {
-  margin-bottom: 1rem;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -120,33 +139,53 @@ button.reset-button:hover {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 80%;
   max-width: 800px;
   position: relative;
   text-align: center;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .close {
   position: absolute;
   top: 4px;
   right: 14px;
-  color: #aaaaaa;
+  color: var(--main-color);
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {
+  html {
+    --s: 200px; /* control the size */
+    --c: #dfdede; /* first color */
+
+    --_g: #0000 8%, var(--c) 0 17%, #0000 0 58%;
+    background: linear-gradient(135deg, #0000 20.5%, var(--c) 0 29.5%, #0000 0)
+        0 calc(var(--s) / 4),
+      linear-gradient(45deg, var(--_g)) calc(var(--s) / 2) 0,
+      linear-gradient(135deg, var(--_g), var(--c) 0 67%, #0000 0),
+      linear-gradient(
+        45deg,
+        var(--_g),
+        var(--c) 0 67%,
+        #0000 0 83%,
+        var(--c) 0 92%,
+        #0000 0
+      ),
+      #e7e7e7; /* second color */
+    background-size: var(--s) var(--s);
+  }
+
   body {
     padding: 1em 0;
-    background-color: #cecece;
   }
 
   .pure-form {
-    border-radius: 12px;
-    padding: 1em;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
   }
 
   .local-buttons {
@@ -157,6 +196,6 @@ button.reset-button:hover {
   }
 
   .local-buttons button {
-    margin: 10px 0 0;
+    margin: 0;
   }
 }
