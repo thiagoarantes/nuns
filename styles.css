@@ -155,4 +155,8 @@ button.reset-button:hover {
     gap: 16px;
     flex-direction: row-reverse;
   }
+
+  .local-buttons button {
+    margin: 10px 0 0;
+  }
 }
