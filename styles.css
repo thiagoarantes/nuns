@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Secular+One&display=swap");
+
 :root {
   --white: #fff;
   --main-color: grey;
@@ -6,10 +8,12 @@
   --secondary-action: #125393;
   --radius: 4px;
   --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --font-1: "Roboto", sans-serif;
+  --font-2: "Secular One", sans-serif;
 }
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-1);
   transition: ease-out 0.4s all;
 }
 
@@ -40,6 +44,8 @@ body {
   height: 26px;
   color: var(--main-color);
   align-items: center;
+  font-family: var(--font-2);
+  font-size: 1.2rem;
 }
 
 .local-round {
