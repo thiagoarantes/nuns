@@ -10,6 +10,7 @@
   --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   --font-1: "Roboto", sans-serif;
   --font-2: "Secular One", sans-serif;
+  --background-light: #ececec;
 }
 
 * {
@@ -30,7 +31,7 @@ body {
 
 .pure-control-group,
 .local-rows {
-  border-bottom: 1px solid #cecece;
+  border-bottom: 1px solid var(--background-light);
 }
 
 .local-row {
@@ -124,7 +125,7 @@ select {
 .pure-form select[disabled] {
   opacity: 1;
   color: var(--secondary-color);
-  background-color: #ececec;
+  background-color: var(--background-light);
 }
 
 .pure-control-group {
@@ -149,7 +150,7 @@ select {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: var(--white);
   margin: auto;
   padding: 20px;
   width: 80%;
@@ -173,19 +174,23 @@ select {
 @media only screen and (min-width: 768px) {
   html {
     --s: 200px; /* control the size */
-    --c: #dfdede; /* first color */
+    --_g: #0000 8%, var(--background-light) 0 17%, #0000 0 58%;
 
-    --_g: #0000 8%, var(--c) 0 17%, #0000 0 58%;
-    background: linear-gradient(135deg, #0000 20.5%, var(--c) 0 29.5%, #0000 0)
+    background: linear-gradient(
+          135deg,
+          #0000 20.5%,
+          var(--background-light) 0 29.5%,
+          #0000 0
+        )
         0 calc(var(--s) / 4),
       linear-gradient(45deg, var(--_g)) calc(var(--s) / 2) 0,
-      linear-gradient(135deg, var(--_g), var(--c) 0 67%, #0000 0),
+      linear-gradient(135deg, var(--_g), var(--background-light) 0 67%, #0000 0),
       linear-gradient(
         45deg,
         var(--_g),
-        var(--c) 0 67%,
+        var(--background-light) 0 67%,
         #0000 0 83%,
-        var(--c) 0 92%,
+        var(--background-light) 0 92%,
         #0000 0
       ),
       #e7e7e7; /* second color */
