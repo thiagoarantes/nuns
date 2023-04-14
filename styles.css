@@ -183,22 +183,22 @@ select {
 }
 
 .nun-pic.angelica {
-  background-image: url(./_media/nuns/angelica.png);
+  background-image: url(./docs/assets/nuns/angelica.png);
 }
 .nun-pic.ann-marie {
-  background-image: url(./_media/nuns/ann-marie.png);
+  background-image: url(./docs/assets/nuns/ann-marie.png);
 }
 .nun-pic.bernadette {
-  background-image: url(./_media/nuns/bernadette.png);
+  background-image: url(./docs/assets/nuns/bernadette.png);
 }
 .nun-pic.celeste {
-  background-image: url(./_media/nuns/celeste.png);
+  background-image: url(./docs/assets/nuns/celeste.png);
 }
 .nun-pic.margaret {
-  background-image: url(./_media/nuns/margaret.png);
+  background-image: url(./docs/assets/nuns/margaret.png);
 }
 .nun-pic.theresa {
-  background-image: url(./_media/nuns/theresa.png);
+  background-image: url(./docs/assets/nuns/theresa.png);
 }
 
 @media only screen and (min-width: 768px) {
