@@ -1,5 +1,6 @@
 const objForm = document.querySelector(".pure-form .local-rows");
 const objButton = document.querySelector(".button-primary");
+const objProfile = document.querySelector(".nun-pic");
 const modal = document.querySelector(".modal");
 let currentRound = 1;
 
@@ -34,6 +35,14 @@ function resetGame() {
 function setNunName(name) {
   localRounds.name = name;
   saveToLocal();
+
+  /** Fill nun's image */
+  setNumImage(name);
+}
+
+function setNumImage(name) {
+  objProfile.className = "nun-pic";
+  objProfile.classList.add(name.toLowerCase());
 }
 
 function populateSheetFromStorage() {
@@ -42,6 +51,9 @@ function populateSheetFromStorage() {
   /** Fill nun's name */
   const nunSelect = document.querySelector(".nun");
   nunSelect.value = name;
+
+  /** Fill nun's image */
+  setNumImage(name);
 
   /** Add as many rounds exist in the local storage */
   rounds.forEach((round, i) => {

@@ -129,6 +129,7 @@ select {
 }
 
 .pure-control-group {
+  position: relative;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -169,6 +170,35 @@ select {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* nuns pics */
+.nun-pic {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  width: 55px;
+  background-size: contain;
+}
+
+.nun-pic.angelica {
+  background-image: url(/_media/nuns/angelica.png);
+}
+.nun-pic.ann-marie {
+  background-image: url(/_media/nuns/ann-marie.png);
+}
+.nun-pic.bernadette {
+  background-image: url(/_media/nuns/bernadette.png);
+}
+.nun-pic.celeste {
+  background-image: url(/_media/nuns/celeste.png);
+}
+.nun-pic.margaret {
+  background-image: url(/_media/nuns/margaret.png);
+}
+.nun-pic.theresa {
+  background-image: url(/_media/nuns/theresa.png);
 }
 
 @media only screen and (min-width: 768px) {
