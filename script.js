@@ -1,5 +1,5 @@
 const objForm = document.querySelector(".pure-form .local-rows");
-const objButton = document.querySelector(".pure-button");
+const objButton = document.querySelector(".button-primary");
 const modal = document.querySelector(".modal");
 let currentRound = 1;
 

@@ -78,31 +78,38 @@ select {
   font-size: 1rem;
 }
 
-button.pure-button {
-  background-color: var(--main-action);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
+.button {
+  border-radius: 24px;
   font-size: 1rem;
+  padding: 8px 16px;
+  height: 42px;
+  min-width: 70px;
 }
 
-button.pure-button:hover {
+.button.button-primary {
+  background-color: var(--main-action);
+  color: var(--white);
+  border: none;
+}
+
+.button.button-primary:hover {
   background-color: var(--secondary-action);
   cursor: pointer;
 }
 
-button.reset-button {
+.button.button-secondary {
   background-color: var(--white);
   color: var(--main-action);
   padding: 8px 16px;
-  border-radius: var(--radius);
-  border: none;
+  border-radius: 24px;
+  border: 2px solid var(--main-action);
   font-size: 1rem;
+  height: 42px;
 }
 
-button.reset-button:hover {
+.button.button-secondary:hover {
   color: var(--secondary-action);
+  border-color: var(--secondary-action);
   cursor: pointer;
 }
 

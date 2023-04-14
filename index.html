@@ -10,6 +10,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="./script.js" defer="defer"></script>
   </head>
   <body>
@@ -35,10 +39,18 @@
         </div>
       </div>
       <div class="local-buttons">
-        <button type="button" class="pure-button" onclick="addNewRound()">
+        <button
+          type="button"
+          class="button button-primary"
+          onclick="addNewRound()"
+        >
           Next
         </button>
-        <button type="button" class="reset-button" onclick="openModal()">
+        <button
+          type="button"
+          class="button button-secondary"
+          onclick="openModal()"
+        >
           Reset Game
         </button>
       </div>
@@ -50,10 +62,18 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <p>Are you sure you want to reset the game?</p>
         <p>
-          <button type="button" class="pure-button" onclick="closeModal()">
+          <button
+            type="button"
+            class="button button-primary"
+            onclick="closeModal()"
+          >
             No
           </button>
-          <button type="button" class="reset-button" onclick="resetGame()">
+          <button
+            type="button"
+            class="button button-secondary"
+            onclick="resetGame()"
+          >
             Yes
           </button>
         </p>
