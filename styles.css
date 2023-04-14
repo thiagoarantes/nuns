@@ -180,6 +180,7 @@ select {
   bottom: 8px;
   width: 55px;
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .nun-pic.angelica {
