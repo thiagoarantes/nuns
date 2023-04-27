@@ -42,7 +42,7 @@ function setNunName(name) {
 
 function setNumImage(name) {
   objProfile.className = "nun-pic";
-  objProfile.classList.add(name.toLowerCase());
+  !!name && objProfile.classList.add(name.toLowerCase());
 }
 
 function populateSheetFromStorage() {
