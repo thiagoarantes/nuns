@@ -11,6 +11,8 @@
   --font-1: "Roboto", sans-serif;
   --font-2: "Secular One", sans-serif;
   --background-light: #ececec;
+  --grid-mobile: 20px minmax(60px, auto) 60px 65px;
+  --grid-desktop: 40px minmax(60px, auto) 160px 160px;
 }
 
 * {
@@ -23,29 +25,30 @@ body {
   margin: 0;
 }
 
-.control-group,
-.sheet-rows {
+.form {
+  box-sizing: border-box;
+  max-width: 768px;
+  margin: 0 auto;
+  background-color: var(--white);
+}
+
+.form input[disabled],
+.form select[disabled] {
+  opacity: 1;
+  color: var(--secondary-color);
+  background-color: var(--background-light);
+}
+
+.sheet-header {
   border-bottom: 1px solid var(--background-light);
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 
-.sheet-row,
-.sheet-title {
-  display: grid;
-  grid-template-columns: 20px minmax(60px, auto) 60px 65px;
-  grid-gap: 0.5em;
-}
-
-.sheet-row {
-  margin-bottom: 1rem;
-}
-
-.control-group,
-.sheet-title {
-  padding-bottom: 1rem;
-}
-
-.sheet-header,
-.sheet-title {
+.sheet-header label {
   height: 26px;
   color: var(--main-color);
   align-items: center;
@@ -53,9 +56,32 @@ body {
   font-size: 1.2rem;
 }
 
-.sheet-title,
+.sheet-title {
+  display: grid;
+  grid-template-columns: var(--grid-mobile);
+  grid-gap: 0.5em;
+  padding: 1rem;
+  height: 26px;
+  color: var(--main-color);
+  align-items: center;
+  font-family: var(--font-2);
+  font-size: 1.2rem;
+}
+
+.sheet-rows {
+  border-bottom: 1px solid var(--background-light);
+  padding: 1rem;
+}
+
+.sheet-row {
+  display: grid;
+  grid-template-columns: var(--grid-mobile);
+  grid-gap: 0.5em;
+  margin-bottom: 1rem;
+}
+
 .sheet-buttons {
-  padding-top: 1rem;
+  padding: 1rem;
 }
 
 .round {
@@ -114,28 +140,6 @@ select {
   color: var(--secondary-action);
   border-color: var(--secondary-action);
   cursor: pointer;
-}
-
-.form {
-  box-sizing: border-box;
-  max-width: 768px;
-  margin: 0 auto;
-  background-color: var(--white);
-  padding: 1rem;
-}
-
-.form input[disabled],
-.form select[disabled] {
-  opacity: 1;
-  color: var(--secondary-color);
-  background-color: var(--background-light);
-}
-
-.control-group {
-  position: relative;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
 }
 
 .modal {
@@ -197,8 +201,8 @@ select {
 /* nuns pics */
 .nun-pic {
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
   bottom: 0;
   width: 55px;
   background-size: contain;
@@ -260,23 +264,21 @@ select {
     margin-top: 5rem;
   }
 
-  .control-group {
+  .sheet-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     background-color: var(--white);
-    padding: 1rem;
     box-shadow: var(--shadow);
   }
 
-  .sheet-row,
   .sheet-title {
-    grid-template-columns: 40px minmax(60px, auto) 160px 160px;
+    grid-template-columns: var(--grid-desktop);
   }
 
-  .sheet-title {
-    padding-top: 0;
+  .sheet-row {
+    grid-template-columns: var(--grid-desktop);
   }
 
   .sheet-buttons {
@@ -288,12 +290,6 @@ select {
 
   .sheet-buttons button {
     margin: 0;
-  }
-
-  /* nuns pics */
-  .nun-pic {
-    top: 0.5rem;
-    right: 0.5rem;
   }
 
   .modal-content {
