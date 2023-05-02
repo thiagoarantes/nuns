@@ -11,6 +11,7 @@
   --font-1: "Roboto", sans-serif;
   --font-2: "Secular One", sans-serif;
   --background-light: #ececec;
+  --background-secondary: #e7e7e7;
   --grid-mobile: 20px minmax(60px, auto) 60px 65px;
   --grid-desktop: 40px minmax(60px, auto) 160px 160px;
 }
@@ -39,6 +40,8 @@ body {
   background-color: var(--background-light);
 }
 
+/* Header */
+
 .sheet-header {
   border-bottom: 1px solid var(--background-light);
 }
@@ -58,6 +61,39 @@ body {
   font-family: var(--font-2);
   font-size: 1.2rem;
 }
+
+/* Nuns pics */
+
+.nun-pic {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  bottom: 0;
+  width: 55px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.nun-pic.angelica {
+  background-image: url(./docs/assets/nuns/angelica.png);
+}
+.nun-pic.ann-marie {
+  background-image: url(./docs/assets/nuns/ann-marie.png);
+}
+.nun-pic.bernadette {
+  background-image: url(./docs/assets/nuns/bernadette.png);
+}
+.nun-pic.celeste {
+  background-image: url(./docs/assets/nuns/celeste.png);
+}
+.nun-pic.margaret {
+  background-image: url(./docs/assets/nuns/margaret.png);
+}
+.nun-pic.theresa {
+  background-image: url(./docs/assets/nuns/theresa.png);
+}
+
+/* Sheets lines */
 
 .sheet-title {
   display: grid;
@@ -110,6 +146,8 @@ select {
   font-size: 1rem;
 }
 
+/* Buttons */
+
 .button {
   border-radius: 1.5rem;
   font-size: 1rem;
@@ -145,6 +183,8 @@ select {
   cursor: pointer;
 }
 
+/* Modal */
+
 .modal {
   opacity: 0;
   pointer-events: none;
@@ -165,7 +205,6 @@ select {
   pointer-events: all;
 }
 
-/* Modal Content */
 .modal-content {
   background-color: var(--white);
   margin: auto;
@@ -201,36 +240,6 @@ select {
   cursor: pointer;
 }
 
-/* nuns pics */
-.nun-pic {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  bottom: 0;
-  width: 55px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.nun-pic.angelica {
-  background-image: url(./docs/assets/nuns/angelica.png);
-}
-.nun-pic.ann-marie {
-  background-image: url(./docs/assets/nuns/ann-marie.png);
-}
-.nun-pic.bernadette {
-  background-image: url(./docs/assets/nuns/bernadette.png);
-}
-.nun-pic.celeste {
-  background-image: url(./docs/assets/nuns/celeste.png);
-}
-.nun-pic.margaret {
-  background-image: url(./docs/assets/nuns/margaret.png);
-}
-.nun-pic.theresa {
-  background-image: url(./docs/assets/nuns/theresa.png);
-}
-
 @media only screen and (min-width: 768px) {
   html {
     --s: 200px; /* control the size */
@@ -253,7 +262,7 @@ select {
         var(--background-light) 0 92%,
         #0000 0
       ),
-      #e7e7e7; /* second color */
+      var(--background-secondary);
     background-size: var(--s) var(--s);
   }
 
@@ -281,10 +290,7 @@ select {
     margin: 0 auto;
   }
 
-  .sheet-title {
-    grid-template-columns: var(--grid-desktop);
-  }
-
+  .sheet-title,
   .sheet-row {
     grid-template-columns: var(--grid-desktop);
   }
@@ -300,11 +306,11 @@ select {
     margin: 0;
   }
 
-  .nun-pic {
-    right: 1rem;
-  }
-
   .modal-content {
     transform: scale(2);
+  }
+
+  .nun-pic {
+    right: 1rem;
   }
 }
