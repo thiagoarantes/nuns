@@ -64,7 +64,6 @@ function populateSheetFromStorage() {
 }
 
 function addNewRound() {
-  console.log("xx");
   /** Step 0 - Check valid round */
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
   const inputSpace = lastRow.querySelector(".space");
