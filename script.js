@@ -25,7 +25,7 @@ function resetGame() {
   currentRound = 1;
 
   populateSheetFromStorage();
-  closeModal();
+  toggleModal();
 
   objButton.removeAttribute("disabled");
 }
@@ -165,12 +165,13 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
   objSheetRows.append(newRow);
 }
 
-function openModal() {
-  modal.style.display = "block";
-}
+function toggleModal() {
+  if (modal.classList.contains("open")) {
+    modal.classList.remove("open");
+    return;
+  }
 
-function closeModal() {
-  modal.style.display = "none";
+  modal.classList.add("open");
 }
 
 populateSheetFromStorage();

@@ -15,7 +15,7 @@
 
 * {
   font-family: var(--font-1);
-  transition: ease-out 0.4s all;
+  transition: ease-out 0.3s all;
 }
 
 body {
@@ -139,7 +139,8 @@ select {
 }
 
 .modal {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -152,6 +153,11 @@ select {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
 /* Modal Content */
 .modal-content {
   background-color: var(--white);
@@ -162,6 +168,10 @@ select {
   text-align: center;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.modal.open .modal-content {
+  transform: scale(1);
 }
 
 .modal-content div {
@@ -284,5 +294,9 @@ select {
   .nun-pic {
     top: 0.5rem;
     right: 0.5rem;
+  }
+
+  .modal-content {
+    transform: scale(2);
   }
 }
