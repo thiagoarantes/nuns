@@ -26,6 +26,8 @@ function resetGame() {
 
   populateSheetFromStorage();
   closeModal();
+
+  objButton.removeAttribute("disabled");
 }
 
 function setNunName(name) {
@@ -62,6 +64,7 @@ function populateSheetFromStorage() {
 }
 
 function addNewRound() {
+  console.log("xx");
   /** Step 0 - Check valid round */
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
   const inputSpace = lastRow.querySelector(".space");
@@ -153,13 +156,14 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
 
   newRow.append(roundDiv, spaceInput, movementSelect, eventSelect);
 
-  if (currentRound >= 15) {
+  if (roundNumber >= 15) {
     objButton.innerHTML = "No more turns";
     objButton.setAttribute("disabled", true);
   } else {
     objButton.innerHTML = `Start next turn [ ${currentRound + 1} ]`;
-    objSheetRows.append(newRow);
   }
+
+  objSheetRows.append(newRow);
 }
 
 function openModal() {
