@@ -1,4 +1,4 @@
-const objForm = document.querySelector(".form .local-rows");
+const objSheetRows = document.querySelector(".sheet-rows");
 const objButton = document.querySelector(".button-primary");
 const objProfile = document.querySelector(".nun-pic");
 const modal = document.querySelector(".modal");
@@ -17,17 +17,13 @@ function saveToLocal() {
 function resetGame() {
   localRounds.name = null;
   localRounds.rounds = [];
+
+  objSheetRows.innerHTML = "";
+
   saveToLocal();
 
-  objForm.innerHTML = `
-    <div class="local-row local-title">
-      <div class="local-round">#</div>
-      <div>Space</div>
-      <div>Mvmt</div>
-      <div>Event</div>
-    </div>
-  `;
   currentRound = 1;
+
   populateSheetFromStorage();
   closeModal();
 }
@@ -67,7 +63,7 @@ function populateSheetFromStorage() {
 
 function addNewRound() {
   /** Step 0 - Check valid round */
-  const lastRow = document.querySelectorAll(".local-row")[currentRound];
+  const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
   const inputSpace = lastRow.querySelector(".space");
   const inputMovement = lastRow.querySelector(".movement");
   const inputEvent = lastRow.querySelector(".event");
@@ -103,12 +99,11 @@ function addNewRound() {
 }
 
 function addRound(roundNumber, _space, _mvmt, _evnt) {
-  console.log(_evnt, 1);
   const newRow = document.createElement("div");
-  newRow.className = "local-row";
+  newRow.className = "sheet-row";
 
   const roundDiv = document.createElement("div");
-  roundDiv.className = "local-round";
+  roundDiv.className = "round";
   roundDiv.innerHTML = roundNumber;
 
   /** Space */
@@ -163,7 +158,7 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
     objButton.setAttribute("disabled", true);
   } else {
     objButton.innerHTML = `Start next turn [ ${currentRound + 1} ]`;
-    objForm.append(newRow);
+    objSheetRows.append(newRow);
   }
 }
 

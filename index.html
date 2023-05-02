@@ -18,8 +18,8 @@
   </head>
   <body>
     <form class="form">
-      <div class="pure-control-group">
-        <label for="aligned-name" class="local-title">Nun's name</label>
+      <div class="control-group">
+        <label for="aligned-name" class="sheet-header">Nun's name</label>
         <select class="nun" onchange="setNunName(this.value)">
           <option value=""></option>
           <option value="Angelica">Angelica</option>
@@ -31,15 +31,14 @@
         </select>
         <div class="nun-pic"></div>
       </div>
-      <div class="local-rows">
-        <div class="local-row local-title">
-          <div class="local-round">#</div>
-          <div>Space</div>
-          <div>Mvmt</div>
-          <div>Event</div>
-        </div>
+      <div class="sheet-title">
+        <div class="round">#</div>
+        <div>Space</div>
+        <div>Mvmt</div>
+        <div>Event</div>
       </div>
-      <div class="local-buttons">
+      <div class="sheet-rows"></div>
+      <div class="sheet-buttons">
         <button
           type="button"
           class="button button-primary"
