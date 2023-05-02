@@ -247,11 +247,26 @@ select {
   .form {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    margin-top: 5rem;
+  }
+
+  .control-group {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    padding: 1rem;
+    box-shadow: var(--shadow);
   }
 
   .sheet-row,
   .sheet-title {
     grid-template-columns: 40px minmax(60px, auto) 160px 160px;
+  }
+
+  .sheet-title {
+    padding-top: 0;
   }
 
   .sheet-buttons {
@@ -263,5 +278,11 @@ select {
 
   .sheet-buttons button {
     margin: 0;
+  }
+
+  /* nuns pics */
+  .nun-pic {
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
