@@ -1,4 +1,4 @@
-const objForm = document.querySelector(".pure-form .local-rows");
+const objForm = document.querySelector(".form .local-rows");
 const objButton = document.querySelector(".button-primary");
 const objProfile = document.querySelector(".nun-pic");
 const modal = document.querySelector(".modal");
@@ -57,47 +57,7 @@ function populateSheetFromStorage() {
 
   /** Add as many rounds exist in the local storage */
   rounds.forEach((round, i) => {
-    const newRow = document.createElement("div");
-    newRow.className = "local-row";
-
-    const roundDiv = document.createElement("div");
-    roundDiv.className = "local-round";
-    roundDiv.innerHTML = i + 1;
-
-    const spaceInput = document.createElement("input");
-    spaceInput.className = "space";
-    spaceInput.setAttribute("type", "number");
-    spaceInput.disabled = true;
-    spaceInput.value = round.space;
-
-    const optionNone = document.createElement("option");
-
-    const movementSelect = document.createElement("select");
-    movementSelect.className = "movement";
-    movementSelect.disabled = true;
-    const optionSS = document.createElement("option");
-    optionSS.innerHTML = "SS";
-    const optionS = document.createElement("option");
-    optionS.innerHTML = "S";
-    const optionW = document.createElement("option");
-    optionW.innerHTML = "W";
-    const optionR = document.createElement("option");
-    optionR.innerHTML = "R";
-    movementSelect.append(optionNone, optionSS, optionS, optionW, optionR);
-    movementSelect.value = round.mvmt;
-
-    const eventSelect = document.createElement("select");
-    eventSelect.className = "event";
-    eventSelect.disabled = true;
-    const optionK = document.createElement("option");
-    optionK.innerHTML = "K";
-    const optionSW = document.createElement("option");
-    optionSW.innerHTML = "SW";
-    eventSelect.append(optionNone, optionK, optionSW);
-    eventSelect.value = rounds.evnt;
-
-    newRow.append(roundDiv, spaceInput, movementSelect, eventSelect);
-    objForm.append(newRow);
+    addRound(i + 1, round.space, round.mvmt, round.evnt);
   });
 
   /** Add a new round */
@@ -106,7 +66,6 @@ function populateSheetFromStorage() {
 }
 
 function addNewRound() {
-  console.log(currentRound);
   /** Step 0 - Check valid round */
   const lastRow = document.querySelectorAll(".local-row")[currentRound];
   const inputSpace = lastRow.querySelector(".space");
@@ -143,25 +102,61 @@ function addNewRound() {
   addRound(++currentRound);
 }
 
-function addRound(roundNumber) {
+function addRound(roundNumber, _space, _mvmt, _evnt) {
+  console.log(_evnt, 1);
   const newRow = document.createElement("div");
   newRow.className = "local-row";
-  newRow.innerHTML = `
-    <div class="local-round">${roundNumber}</div>
-    <input class="space" type="number" />
-    <select class="movement">
-      <option value=""></option>
-      <option value="SS">SS</option>
-      <option value="S">S</option>
-      <option value="W">W</option>
-      <option value="R">R</option>
-    </select>
-    <select class="event">
-      <option value=""></option>
-      <option value="K">K</option>
-      <option value="SW">SW</option>
-    </select>
-  `;
+
+  const roundDiv = document.createElement("div");
+  roundDiv.className = "local-round";
+  roundDiv.innerHTML = roundNumber;
+
+  /** Space */
+  const spaceInput = document.createElement("input");
+  spaceInput.className = "space";
+  spaceInput.setAttribute("type", "number");
+  if (_space !== undefined) {
+    spaceInput.disabled = true;
+    spaceInput.value = _space;
+  }
+
+  /** Movement */
+  const movementSelect = document.createElement("select");
+  movementSelect.className = "movement";
+  const optionSS = document.createElement("option");
+  optionSS.innerHTML = "SS";
+  const optionS = document.createElement("option");
+  optionS.innerHTML = "S";
+  const optionW = document.createElement("option");
+  optionW.innerHTML = "W";
+  const optionR = document.createElement("option");
+  optionR.innerHTML = "R";
+  movementSelect.append(
+    document.createElement("option"),
+    optionSS,
+    optionS,
+    optionW,
+    optionR
+  );
+  if (_mvmt !== undefined) {
+    movementSelect.disabled = true;
+    movementSelect.value = _mvmt;
+  }
+
+  /** Event */
+  const eventSelect = document.createElement("select");
+  eventSelect.className = "event";
+  const optionK = document.createElement("option");
+  optionK.innerHTML = "K";
+  const optionSW = document.createElement("option");
+  optionSW.innerHTML = "SW";
+  eventSelect.append(document.createElement("option"), optionK, optionSW);
+  if (_evnt !== undefined) {
+    eventSelect.disabled = true;
+    eventSelect.value = _evnt;
+  }
+
+  newRow.append(roundDiv, spaceInput, movementSelect, eventSelect);
 
   if (currentRound >= 15) {
     objButton.innerHTML = "No more turns";

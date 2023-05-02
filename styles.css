@@ -114,15 +114,15 @@ select {
   cursor: pointer;
 }
 
-.pure-form {
+.form {
   box-sizing: border-box;
   max-width: 768px;
   margin: 0 auto;
   background-color: var(--white);
 }
 
-.pure-form input[disabled],
-.pure-form select[disabled] {
+.form input[disabled],
+.form select[disabled] {
   opacity: 1;
   color: var(--secondary-color);
   background-color: var(--background-light);
@@ -232,7 +232,7 @@ select {
     padding: 1em 0;
   }
 
-  .pure-form {
+  .form {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
