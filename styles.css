@@ -118,7 +118,7 @@ select {
 
 .form {
   box-sizing: border-box;
-  max-width: 760.5rem;
+  max-width: 768px;
   margin: 0 auto;
   background-color: var(--white);
   padding: 1rem;
@@ -156,9 +156,8 @@ select {
 .modal-content {
   background-color: var(--white);
   margin: auto;
-  padding: 2rem 20px;
-  width: 80%;
-  max-width: 800px;
+  padding: 2rem;
+  width: fit-content;
   position: relative;
   text-align: center;
   border-radius: var(--radius);
@@ -215,7 +214,7 @@ select {
   background-image: url(./docs/assets/nuns/theresa.png);
 }
 
-@media only screen and (min-width: 760.5rem) {
+@media only screen and (min-width: 768px) {
   html {
     --s: 200px; /* control the size */
     --_g: #0000 8%, var(--background-light) 0 17%, #0000 0 58%;
@@ -248,6 +247,11 @@ select {
   .form {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+  }
+
+  .sheet-row,
+  .sheet-title {
+    grid-template-columns: 40px minmax(60px, auto) 160px 160px;
   }
 
   .sheet-buttons {
