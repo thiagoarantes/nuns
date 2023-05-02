@@ -41,14 +41,17 @@ body {
 
 .sheet-header {
   border-bottom: 1px solid var(--background-light);
-  padding: 1rem;
+}
+
+.sheet-header > div {
   position: relative;
   display: flex;
   gap: 2rem;
+  padding: 1rem;
   align-items: center;
 }
 
-.sheet-header label {
+.sheet-header > div label {
   height: 26px;
   color: var(--main-color);
   align-items: center;
@@ -273,6 +276,11 @@ select {
     box-shadow: var(--shadow);
   }
 
+  .sheet-header > div {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+
   .sheet-title {
     grid-template-columns: var(--grid-desktop);
   }
@@ -290,6 +298,10 @@ select {
 
   .sheet-buttons button {
     margin: 0;
+  }
+
+  .nun-pic {
+    right: 1rem;
   }
 
   .modal-content {
