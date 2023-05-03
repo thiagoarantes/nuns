@@ -33,13 +33,6 @@ body {
   background-color: var(--white);
 }
 
-.form input[disabled],
-.form select[disabled] {
-  opacity: 1;
-  color: var(--secondary-color);
-  background-color: var(--background-light);
-}
-
 /* Header */
 
 .sheet-header {
@@ -133,17 +126,24 @@ body {
   margin: 10px 0;
 }
 
-input[type="number"] {
-  min-width: 60px;
-  max-width: 100%;
-}
-
-input[type="number"],
+input,
 select {
   border: 1px solid var(--main-color);
   border-radius: var(--radius);
   padding: 0.5rem;
   font-size: 1rem;
+}
+
+input[disabled],
+select[disabled] {
+  opacity: 1;
+  color: var(--secondary-color);
+  background-color: var(--background-light);
+}
+
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--main-action);
 }
 
 /* Buttons */
@@ -181,6 +181,11 @@ select {
   color: var(--secondary-action);
   border-color: var(--secondary-action);
   cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--main-action);
+  outline-offset: 3px;
 }
 
 /* Modal */
