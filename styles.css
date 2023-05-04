@@ -5,7 +5,7 @@
   --white: #fff;
   --main-color: grey;
   --secondary-color: #717b7c;
-  --main-action: dodgerblue;
+  --main-action: rgb(27, 139, 252);
   --secondary-action: #125393;
   --radius: 4px;
   --shadow: rgba(0, 0, 0, 0.24) 0px 3px 0.5rem;
@@ -13,7 +13,7 @@
   --font-2: "Secular One", sans-serif;
   --background-light: #ececec;
   --background-secondary: #e7e7e7;
-  --grid-mobile: 20px minmax(60px, auto) 60px 65px;
+  --grid-mobile: 20px minmax(60px, auto) 70px 75px;
   --grid-desktop: 40px minmax(60px, auto) 160px 160px;
 }
 
@@ -22,9 +22,47 @@
   transition: ease-out 0.3s all;
 }
 
+/* Theme by nun */
+.angelica {
+  --main-action: #745997;
+  --secondary-action: #524262;
+  --white: #faf7ff;
+}
+.ann-marie {
+  --main-action: #a66d30;
+  --secondary-action: #754d22;
+  --white: #f6f2ed;
+}
+.bernadette {
+  --main-action: #9f3131;
+  --secondary-action: #6b2121;
+  --white: #fbf2f2;
+}
+.celeste {
+  --main-action: #909128;
+  --secondary-action: #5e5f1b;
+  --white: #fbfbf3;
+}
+.margaret {
+  --main-action: #38a517;
+  --secondary-action: #24690e;
+  --white: #f5fbf3;
+}
+.theresa {
+  --main-action: #2e68c0;
+  --secondary-action: #1d4684;
+  --white: #f0f4fa;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
+  background-color: var(--white);
 }
 
 .form {
@@ -76,22 +114,22 @@ body {
   background-repeat: no-repeat;
 }
 
-.nun-pic.angelica {
+.angelica .nun-pic {
   background-image: url(./docs/assets/nuns/angelica.png);
 }
-.nun-pic.ann-marie {
+.ann-marie .nun-pic {
   background-image: url(./docs/assets/nuns/ann-marie.png);
 }
-.nun-pic.bernadette {
+.bernadette .nun-pic {
   background-image: url(./docs/assets/nuns/bernadette.png);
 }
-.nun-pic.celeste {
+.celeste .nun-pic {
   background-image: url(./docs/assets/nuns/celeste.png);
 }
-.nun-pic.margaret {
+.margaret .nun-pic {
   background-image: url(./docs/assets/nuns/margaret.png);
 }
-.nun-pic.theresa {
+.theresa .nun-pic {
   background-image: url(./docs/assets/nuns/theresa.png);
 }
 
@@ -165,6 +203,7 @@ input,
 select {
   border: 1px solid var(--main-color);
   border-radius: var(--radius);
+  background-color: transparent;
   padding: 0.5rem;
   font-size: 1rem;
   appearance: none;
@@ -189,7 +228,6 @@ select:focus-visible {
 .select-wrapper select {
   width: 100%;
   padding-right: 32px;
-  background-color: transparent;
   position: relative;
   z-index: 1;
 }
@@ -329,7 +367,7 @@ select:focus-visible {
   }
 
   body {
-    padding: 1em 0;
+    background-color: unset;
   }
 
   .form {
@@ -374,5 +412,9 @@ select:focus-visible {
 
   .nun-pic {
     right: 1rem;
+  }
+
+  .sheet-empty {
+    margin-top: 96px;
   }
 }
