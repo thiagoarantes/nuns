@@ -118,6 +118,8 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
   }
 
   /** Movement */
+  const movementWrapper = document.createElement("div");
+  movementWrapper.className = "select-wrapper";
   const movementSelect = document.createElement("select");
   movementSelect.className = "movement";
   const optionSS = document.createElement("option");
@@ -139,8 +141,11 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
     movementSelect.disabled = true;
     movementSelect.value = _mvmt;
   }
+  movementWrapper.append(movementSelect);
 
   /** Event */
+  const eventWrapper = document.createElement("div");
+  eventWrapper.className = "select-wrapper";
   const eventSelect = document.createElement("select");
   eventSelect.className = "event";
   const optionK = document.createElement("option");
@@ -152,8 +157,9 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
     eventSelect.disabled = true;
     eventSelect.value = _evnt;
   }
+  eventWrapper.append(eventSelect);
 
-  newRow.append(roundDiv, spaceInput, movementSelect, eventSelect);
+  newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
 
   if (roundNumber >= 15) {
     objButton.innerHTML = "No more turns";

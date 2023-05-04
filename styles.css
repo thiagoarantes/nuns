@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Secular+One&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 :root {
   --white: #fff;
@@ -42,7 +43,7 @@ body {
 .sheet-header > div {
   position: relative;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 1rem;
   align-items: center;
 }
@@ -53,6 +54,10 @@ body {
   align-items: center;
   font-family: var(--font-2);
   font-size: 1.2rem;
+}
+
+.sheet-header .select-wrapper {
+  width: 130px;
 }
 
 /* Nuns pics */
@@ -126,12 +131,37 @@ body {
   margin: 10px 0;
 }
 
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::before {
+  font: var(--fa-font-solid);
+  color: var(--secondary-action);
+  content: "\f078";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
 input,
 select {
   border: 1px solid var(--main-color);
   border-radius: var(--radius);
   padding: 0.5rem;
   font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
 }
 
 input[disabled],
@@ -144,6 +174,14 @@ select[disabled] {
 input:focus-visible,
 select:focus-visible {
   outline: 3px solid var(--main-action);
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding-right: 32px;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 /* Buttons */
