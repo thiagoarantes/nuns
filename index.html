@@ -23,7 +23,6 @@
           <label for="aligned-name">Nun's name</label>
           <div class="select-wrapper">
             <select class="nun" onchange="setNunName(this.value)">
-              <option value=""></option>
               <option value="Angelica">Angelica</option>
               <option value="Ann-Marie">Ann Marie</option>
               <option value="Bernadette">Bernadette</option>
@@ -35,30 +34,33 @@
           <div class="nun-pic"></div>
         </div>
       </div>
-      <div class="sheet-title">
-        <div class="round">#</div>
-        <div>End Space</div>
-        <div>Mvmt</div>
-        <div>Event</div>
-      </div>
-      <div class="sheet-rows"></div>
-      <div class="sheet-buttons">
-        <button
-          type="button"
-          class="button button-primary"
-          onclick="addNewRound()"
-        >
-          Next
-        </button>
-        <button
-          type="button"
-          class="button button-secondary"
-          onclick="toggleModal()"
-        >
-          Reset Game
-        </button>
+      <div class="sheet-form">
+        <div class="sheet-title">
+          <div class="round">#</div>
+          <div>End Space</div>
+          <div>Mvmt</div>
+          <div>Event</div>
+        </div>
+        <div class="sheet-rows"></div>
+        <div class="sheet-buttons">
+          <button
+            type="button"
+            class="button button-primary"
+            onclick="addNewRound()"
+          >
+            Next
+          </button>
+          <button
+            type="button"
+            class="button button-secondary"
+            onclick="toggleModal()"
+          >
+            Reset Game
+          </button>
+        </div>
       </div>
     </form>
+    <div class="sheet-empty">Select nun to start game</div>
     <!-- Reset Modal -->
     <div class="modal">
       <!-- Modal content -->

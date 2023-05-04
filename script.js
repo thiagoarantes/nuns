@@ -1,3 +1,5 @@
+const objSheetForm = document.querySelector(".sheet-form");
+const objSheetEmpty = document.querySelector(".sheet-empty");
 const objSheetRows = document.querySelector(".sheet-rows");
 const objButton = document.querySelector(".button-primary");
 const objProfile = document.querySelector(".nun-pic");
@@ -28,6 +30,8 @@ function resetGame() {
   toggleModal();
 
   objButton.removeAttribute("disabled");
+
+  closeGame();
 }
 
 function setNunName(name) {
@@ -36,6 +40,8 @@ function setNunName(name) {
 
   /** Fill nun's image */
   setNumImage(name);
+
+  openGame();
 }
 
 function setNumImage(name) {
@@ -61,6 +67,8 @@ function populateSheetFromStorage() {
   /** Add a new round */
   currentRound = rounds.length;
   addRound(++currentRound);
+
+  openGame();
 }
 
 function addNewRound() {
@@ -178,6 +186,16 @@ function toggleModal() {
   }
 
   modal.classList.add("open");
+}
+
+function openGame() {
+  objSheetEmpty.style.display = "none";
+  objSheetForm.style.display = "block";
+}
+
+function closeGame() {
+  objSheetEmpty.style.display = "block";
+  objSheetForm.style.display = "none";
 }
 
 populateSheetFromStorage();

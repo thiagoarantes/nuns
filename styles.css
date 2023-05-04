@@ -34,6 +34,10 @@ body {
   background-color: var(--white);
 }
 
+.sheet-form {
+  display: none;
+}
+
 /* Header */
 
 .sheet-header {
@@ -101,8 +105,11 @@ body {
   height: 26px;
   color: var(--main-color);
   align-items: center;
-  font-family: var(--font-2);
   font-size: 1.2rem;
+}
+
+.sheet-title > div {
+  font-family: var(--font-2);
 }
 
 .sheet-rows {
@@ -122,6 +129,9 @@ body {
 }
 
 .round {
+  font-family: var(--font-2);
+  font-size: 1.2rem;
+  color: var(--main-color);
   align-self: center;
   justify-self: center;
 }
@@ -281,6 +291,15 @@ select:focus-visible {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* Empty game */
+.sheet-empty {
+  font-family: var(--font-2);
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--main-color);
+  margin-top: 24px;
 }
 
 @media only screen and (min-width: 768px) {
