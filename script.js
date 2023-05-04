@@ -67,7 +67,7 @@ function populateSheetFromStorage() {
   currentRound = rounds.length;
   addRound(++currentRound);
 
-  openGame();
+  !!name && openGame();
 }
 
 function addNewRound() {
