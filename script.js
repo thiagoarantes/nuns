@@ -72,15 +72,19 @@ function addRound(roundNumber, _space, _mvmt, _evnt) {
   movementSelect.className = "movement";
 
   const optionSS = document.createElement("option");
+  optionSS.value = "SS";
   optionSS.innerHTML = "SS";
 
   const optionS = document.createElement("option");
+  optionS.value = "S";
   optionS.innerHTML = "S";
 
   const optionW = document.createElement("option");
+  optionW.value = "W";
   optionW.innerHTML = "W";
 
   const optionR = document.createElement("option");
+  optionR.value = "R";
   optionR.innerHTML = "R";
 
   movementSelect.append(
