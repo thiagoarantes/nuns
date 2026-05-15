@@ -1,4 +1,4 @@
-import { nunsInitials } from "./defaults.js";
+import { nunsInitials, nunsMovements } from "./defaults.js";
 import { LOCAL_STORAGE_KEY } from "./constants.js";
 
 /** INITIAL STATE */
@@ -48,7 +48,7 @@ export function selectNun(newNun) {
   localRounds.name = newNun;
   localRounds.startAt = nunsInitials[newNun];
 
-  saveToLocal();
+  saveToLocalStorage();
   setNumImage(newNun);
   openGame();
 }
@@ -104,7 +104,7 @@ export function startNextTurn() {
     event: inputEvent.value,
   });
 
-  saveToLocal();
+  saveToLocalStorage();
 
   /** Step 3 - Create new round */
 
@@ -120,7 +120,7 @@ export function confirmResetGame() {
 
   sheetRows.innerHTML = "";
 
-  saveToLocal();
+  saveToLocalStorage();
 
   currentRound = 1;
 
@@ -151,8 +151,6 @@ function closeGame() {
 function addRound(_space, _movement, _event) {
   const { buttonNewRound, sheetRows } = objDom;
 
-  currentRound = currentRound + 1;
-
   const newRow = document.createElement("div");
   newRow.className = "sheet-row";
 
@@ -178,29 +176,17 @@ function addRound(_space, _movement, _event) {
   const movementSelect = document.createElement("select");
   movementSelect.className = "movement";
 
-  const optionSS = document.createElement("option");
-  optionSS.value = "SS";
-  optionSS.innerHTML = "SS";
+  const movementOptions = [];
 
-  const optionS = document.createElement("option");
-  optionS.value = "S";
-  optionS.innerHTML = "S";
+  Object.values(nunsMovements).forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.innerHTML = value;
 
-  const optionW = document.createElement("option");
-  optionW.value = "W";
-  optionW.innerHTML = "W";
+    movementOptions.push(option);
+  });
 
-  const optionR = document.createElement("option");
-  optionR.value = "R";
-  optionR.innerHTML = "R";
-
-  movementSelect.append(
-    document.createElement("option"),
-    optionSS,
-    optionS,
-    optionW,
-    optionR,
-  );
+  movementSelect.append(document.createElement("option"), ...movementOptions);
 
   if (_movement !== undefined) {
     movementSelect.disabled = true;
@@ -233,6 +219,8 @@ function addRound(_space, _movement, _event) {
 
   newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
 
+  currentRound = currentRound + 1;
+
   if (currentRound >= 15) {
     buttonNewRound.innerHTML = "No more turns";
     buttonNewRound.setAttribute("disabled", true);
@@ -243,6 +231,6 @@ function addRound(_space, _movement, _event) {
   sheetRows.append(newRow);
 }
 
-function saveToLocal() {
+function saveToLocalStorage() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRounds));
 }

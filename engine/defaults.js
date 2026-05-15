@@ -6,3 +6,10 @@ export const nunsInitials = {
   Margaret: 2,
   Theresa: 1,
 };
+
+export const nunsMovements = {
+  "Standing-Still": "SS",
+  Sneaking: "S",
+  Walking: "W",
+  Running: "R",
+};
