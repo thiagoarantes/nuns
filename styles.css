@@ -13,8 +13,8 @@
   --font-2: "Secular One", sans-serif;
   --background-light: #ececec;
   --background-secondary: #e7e7e7;
-  --grid-mobile: 20px minmax(60px, auto) 70px 75px;
-  --grid-desktop: 40px minmax(60px, auto) 160px 160px;
+  --grid-mobile: 20px repeat(3, 1fr);
+  --grid-desktop: 40px repeat(3, 1fr);
 }
 
 * {
@@ -387,11 +387,6 @@ select:focus-visible {
   .sheet-header > div {
     max-width: 768px;
     margin: 0 auto;
-  }
-
-  .sheet-title,
-  .sheet-row {
-    grid-template-columns: var(--grid-desktop);
   }
 
   .sheet-buttons {

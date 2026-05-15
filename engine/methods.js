@@ -167,17 +167,6 @@ function addRound(_space, _movement, _event) {
   roundDiv.className = "round";
   roundDiv.innerHTML = currentRound;
 
-  /** Space */
-
-  const spaceInput = document.createElement("input");
-  spaceInput.className = "space";
-  spaceInput.setAttribute("type", "number");
-
-  if (_space !== undefined) {
-    spaceInput.disabled = true;
-    spaceInput.value = _space;
-  }
-
   /** Movement */
 
   const movementWrapper = document.createElement("div");
@@ -202,6 +191,17 @@ function addRound(_space, _movement, _event) {
   }
 
   movementWrapper.append(movementSelect);
+
+  /** Space */
+
+  const spaceInput = document.createElement("input");
+  spaceInput.className = "space";
+  spaceInput.setAttribute("type", "number");
+
+  if (_space !== undefined) {
+    spaceInput.disabled = true;
+    spaceInput.value = _space;
+  }
 
   /** Items */
 
@@ -228,7 +228,7 @@ function addRound(_space, _movement, _event) {
 
   itemWrapper.append(itemSelect);
 
-  newRow.append(roundDiv, spaceInput, movementWrapper, itemWrapper);
+  newRow.append(roundDiv, movementWrapper, spaceInput, itemWrapper);
 
   if (currentRound >= MAX_ROUNDS) {
     buttonNewRound.innerHTML = "No more turns";
