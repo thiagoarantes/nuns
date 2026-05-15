@@ -1,6 +1,17 @@
 import { nunsInitials } from "./defaults.js";
 import { LOCAL_STORAGE_KEY } from "./constants.js";
 
+/** INITIAL STATE */
+const objDom = {
+  sheetForm: document.querySelector(".sheet-form"),
+  sheetEmpty: document.querySelector(".sheet-empty"),
+  sheetRows: document.querySelector(".sheet-rows"),
+  buttonNewRound: document.querySelector(".add-new-round"),
+  resetModal: document.querySelector(".modal"),
+};
+
+/** PUBLIC METHODS */
+
 export function getFromLocal() {
   return (
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {
@@ -11,18 +22,11 @@ export function getFromLocal() {
   );
 }
 
-export function populateSheetFromStorage(
-  localRounds,
-  currentRound,
-  objButton,
-  objSheetRows,
-  objSheetEmpty,
-  objSheetForm,
-) {
+export function populateSheetFromStorage(localRounds, currentRound) {
   const { name, rounds } = localRounds;
 
   /** Fill nun's name */
-  const nunSelect = document.querySelector(".nun");
+  const nunSelect = document.querySelector("select.nun");
   nunSelect.value = name;
 
   /** Fill nun's image */
@@ -35,41 +39,37 @@ export function populateSheetFromStorage(
 
   /** Add a new round */
   currentRound = rounds.length;
-  addRound(++currentRound, objButton, objSheetRows);
+  addRound(++currentRound);
 
-  !!name && openGame(objSheetEmpty, objSheetForm);
+  !!name && openGame();
 }
 
-export function selectNun(localRounds, domSheetEmpty, domSheetForm) {
-  const newNun = event.target.value;
-
+export function selectNun(localRounds, newNun) {
   localRounds.name = newNun;
   localRounds.startAt = nunsInitials[newNun];
 
   saveToLocal(localRounds);
   setNumImage(newNun);
-  openGame(domSheetEmpty, domSheetForm);
+  openGame();
 }
 
 export function setNumImage(name) {
   document.body.className = name?.toLowerCase();
 }
 
-export function toggleModal(objModal) {
-  if (objModal.classList.contains("open")) {
-    objModal.classList.remove("open");
+export function toggleModal() {
+  const modal = objDom.resetModal;
+
+  if (modal.classList.contains("open")) {
+    modal.classList.remove("open");
+
     return;
   }
 
-  objModal.classList.add("open");
+  modal.classList.add("open");
 }
 
-export function startNextTurn(
-  localRounds,
-  currentRound,
-  domButton,
-  domSheetRows,
-) {
+export function startNextTurn(localRounds, currentRound) {
   /** Step 0 - Check valid round */
 
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
@@ -109,63 +109,49 @@ export function startNextTurn(
 
   /** Step 3 - Create new round */
 
-  addRound(++currentRound, domButton, domSheetRows);
+  addRound(++currentRound);
 }
 
-export function confirmResetGame(
-  localRounds,
-  currentRound,
-  domButton,
-  domSheetRows,
-  domSheetEmpty,
-  domSheetForm,
-  domModal,
-) {
+export function confirmResetGame(localRounds, currentRound) {
+  const { sheetRows, buttonNewRound } = objDom;
+
   localRounds.name = null;
   localRounds.startAt = 0;
   localRounds.rounds = [];
 
-  domSheetRows.innerHTML = "";
+  sheetRows.innerHTML = "";
 
   saveToLocal(localRounds);
 
   currentRound = 1;
 
-  populateSheetFromStorage(
-    localRounds,
-    currentRound,
-    domButton,
-    domSheetRows,
-    domSheetEmpty,
-    domSheetForm,
-  );
-  toggleModal(domModal);
+  populateSheetFromStorage(localRounds, currentRound);
+  toggleModal();
 
-  domButton.removeAttribute("disabled");
+  buttonNewRound.removeAttribute("disabled");
 
-  closeGame(domSheetEmpty, domSheetForm);
+  closeGame();
 }
 
 /** PRIVATE METHODS */
 
-function openGame(objSheetEmpty, objSheetForm) {
-  objSheetEmpty.style.display = "none";
-  objSheetForm.style.display = "block";
+function openGame() {
+  const { sheetEmpty, sheetForm } = objDom;
+
+  sheetEmpty.style.display = "none";
+  sheetForm.style.display = "block";
 }
 
-function closeGame(objSheetEmpty, objSheetForm) {
-  objSheetEmpty.style.display = "block";
-  objSheetForm.style.display = "none";
+function closeGame() {
+  const { sheetEmpty, sheetForm } = objDom;
+
+  sheetEmpty.style.display = "block";
+  sheetForm.style.display = "none";
 }
 
-function addRound(
-  roundNumber,
-  objButton,
-  objSheetRows,
-  _space,
-  _movement,
-  _event,
-) {
+function addRound(roundNumber, _space, _movement, _event) {
+  const { buttonNewRound, sheetRows } = objDom;
+
   const newRow = document.createElement("div");
   newRow.className = "sheet-row";
 
@@ -247,13 +233,13 @@ function addRound(
   newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
 
   if (roundNumber >= 15) {
-    objButton.innerHTML = "No more turns";
-    objButton.setAttribute("disabled", true);
+    buttonNewRound.innerHTML = "No more turns";
+    buttonNewRound.setAttribute("disabled", true);
   } else {
-    objButton.innerHTML = `Start next turn [ ${roundNumber + 1} ]`;
+    buttonNewRound.innerHTML = `Start next turn [ ${roundNumber + 1} ]`;
   }
 
-  objSheetRows.append(newRow);
+  sheetRows.append(newRow);
 }
 
 function saveToLocal(localRounds) {
