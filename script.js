@@ -1,8 +1,9 @@
+import { nunsInitials } from "./defaults.js";
+
 const objSheetForm = document.querySelector(".sheet-form");
 const objSheetEmpty = document.querySelector(".sheet-empty");
 const objSheetRows = document.querySelector(".sheet-rows");
 const objButton = document.querySelector(".button-primary");
-const objProfile = document.querySelector(".nun-pic");
 const modal = document.querySelector(".modal");
 
 let currentRound = 1;
@@ -10,39 +11,12 @@ let currentRound = 1;
 /** start local rounds */
 const localRounds = JSON.parse(localStorage.getItem("tarantes-nuns")) || {
   name: null,
+  startAt: 0,
   rounds: [],
 };
 
 function saveToLocal() {
   localStorage.setItem("tarantes-nuns", JSON.stringify(localRounds));
-}
-
-function resetGame() {
-  localRounds.name = null;
-  localRounds.rounds = [];
-
-  objSheetRows.innerHTML = "";
-
-  saveToLocal();
-
-  currentRound = 1;
-
-  populateSheetFromStorage();
-  toggleModal();
-
-  objButton.removeAttribute("disabled");
-
-  closeGame();
-}
-
-function setNunName(name) {
-  localRounds.name = name;
-  saveToLocal();
-
-  /** Fill nun's image */
-  setNumImage(name);
-
-  openGame();
 }
 
 function setNumImage(name) {
@@ -69,48 +43,6 @@ function populateSheetFromStorage() {
   addRound(++currentRound);
 
   !!name && openGame();
-}
-
-function addNewRound() {
-  /** Step 0 - Check valid round */
-  const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
-  const inputSpace = lastRow.querySelector(".space");
-  const inputMovement = lastRow.querySelector(".movement");
-  const inputEvent = lastRow.querySelector(".event");
-
-  if (inputSpace.value === "" || inputMovement.value === "") {
-    lastRow.classList.add("animate__animated");
-    lastRow.classList.add("animate__shakeX");
-
-    setTimeout(() => {
-      lastRow.classList.remove("animate__animated");
-      lastRow.classList.remove("animate__shakeX");
-    }, 1000);
-
-    return;
-  }
-
-  /** Step 1 - Disable last round  */
-
-  const inputs = lastRow.querySelectorAll("input, select");
-
-  inputs.forEach((input) => {
-    input.setAttribute("disabled", true);
-  });
-
-  /** Step 2 - Save last round to local storage */
-
-  localRounds.rounds.push({
-    space: inputSpace.value,
-    mvmt: inputMovement.value,
-    evnt: inputEvent.value,
-  });
-
-  saveToLocal();
-
-  /** Step 3 - Create new round */
-
-  addRound(++currentRound);
 }
 
 function addRound(roundNumber, _space, _mvmt, _evnt) {
@@ -220,3 +152,102 @@ function closeGame() {
 }
 
 populateSheetFromStorage();
+
+/**
+ * ALL EVENTS
+ */
+
+/** Select Nun */
+document.querySelector("select.nun").addEventListener("change", (event) => {
+  const newNun = event.target.value;
+
+  localRounds.name = newNun;
+  localRounds.startAt = nunsInitials[newNun];
+
+  saveToLocal();
+
+  /** Fill nun's image */
+  setNumImage(newNun);
+
+  openGame();
+});
+
+/** Modal - Confirm Reset Game */
+document
+  .querySelector("button.confirm-reset-game")
+  .addEventListener("click", () => {
+    localRounds.name = null;
+    localRounds.startAt = 0;
+    localRounds.rounds = [];
+
+    objSheetRows.innerHTML = "";
+
+    saveToLocal();
+
+    currentRound = 1;
+
+    populateSheetFromStorage();
+    toggleModal();
+
+    objButton.removeAttribute("disabled");
+
+    closeGame();
+  });
+
+/** Main Reset Game */
+document.querySelector("button.reset-game").addEventListener("click", () => {
+  toggleModal();
+});
+
+/** Modal - Close Button (X) */
+document.querySelector("span.close").addEventListener("click", () => {
+  toggleModal();
+});
+
+/** Modal - Cancel Button */
+document.querySelector("button.cancel-close").addEventListener("click", () => {
+  toggleModal();
+});
+
+/** Start Next Turn */
+document.querySelector("button.add-new-round").addEventListener("click", () => {
+  /** Step 0 - Check valid round */
+  const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
+  const inputSpace = lastRow.querySelector(".space");
+  const inputMovement = lastRow.querySelector(".movement");
+  const inputEvent = lastRow.querySelector(".event");
+
+  if (inputSpace.value === "" || inputMovement.value === "") {
+    lastRow.classList.add("animate__animated");
+    lastRow.classList.add("animate__shakeX");
+
+    setTimeout(() => {
+      lastRow.classList.remove("animate__animated");
+      lastRow.classList.remove("animate__shakeX");
+    }, 1000);
+
+    return;
+  }
+
+  /** Step 1 - Disable last round  */
+
+  const inputs = lastRow.querySelectorAll("input, select");
+
+  inputs.forEach((input) => {
+    input.setAttribute("disabled", true);
+  });
+
+  /** Step 2 - Save last round to local storage */
+
+  localRounds.rounds.push({
+    space: inputSpace.value,
+    mvmt: inputMovement.value,
+    evnt: inputEvent.value,
+  });
+
+  saveToLocal();
+
+  /** Step 3 - Create new round */
+
+  addRound(++currentRound);
+});

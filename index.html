@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-    <script src="./script.js" defer="defer"></script>
+    <script type="module" src="./script.js" defer="defer"></script>
   </head>
   <body>
     <form class="form">
@@ -18,7 +18,7 @@
         <div>
           <label for="aligned-name">Nun's name</label>
           <div class="select-wrapper">
-            <select class="nun" onchange="setNunName(this.value)">
+            <select class="nun">
               <option value="Angelica">Angelica</option>
               <option value="Ann-Marie">Ann Marie</option>
               <option value="Bernadette">Bernadette</option>
@@ -39,18 +39,10 @@
         </div>
         <div class="sheet-rows"></div>
         <div class="sheet-buttons">
-          <button
-            type="button"
-            class="button button-primary"
-            onclick="addNewRound()"
-          >
+          <button type="button" class="button button-primary add-new-round">
             Next
           </button>
-          <button
-            type="button"
-            class="button button-secondary"
-            onclick="toggleModal()"
-          >
+          <button type="button" class="button button-secondary reset-game">
             Reset Game
           </button>
         </div>
@@ -61,20 +53,15 @@
     <div class="modal">
       <!-- Modal content -->
       <div class="modal-content">
-        <span class="close" onclick="toggleModal()">&times;</span>
+        <span class="close">&times;</span>
         <p>Are you sure you want to reset the game?</p>
         <div>
-          <button
-            type="button"
-            class="button button-primary"
-            onclick="toggleModal()"
-          >
+          <button type="button" class="button button-primary cancel-close">
             Cancel
           </button>
           <button
             type="button"
-            class="button button-secondary"
-            onclick="resetGame()"
+            class="button button-secondary confirm-reset-game"
           >
             Reset game
           </button>
