@@ -1,4 +1,4 @@
-export const nunsInitials = {
+export const nunsInitialSpaces = {
   Angelica: 5,
   "Ann-Marie": 1,
   Bernadette: 6,

@@ -1,8 +1,9 @@
-import { nunsInitials, nunsItems, nunsMovements } from "./defaults.js";
+import { nunsInitialSpaces, nunsItems, nunsMovements } from "./defaults.js";
 import { LOCAL_STORAGE_KEY, MAX_ROUNDS } from "./constants.js";
 
 /** INITIAL STATE */
 const objDom = {
+  nunSelect: document.querySelector("select.nun"),
   sheetForm: document.querySelector(".sheet-form"),
   sheetEmpty: document.querySelector(".sheet-empty"),
   sheetRows: document.querySelector(".sheet-rows"),
@@ -24,15 +25,14 @@ export function populateSheetFromStorage() {
   const { name, rounds } = localRounds;
 
   /** Fill nun's name */
-  const nunSelect = document.querySelector("select.nun");
-  nunSelect.value = name;
+  objDom.nunSelect.value = name;
 
   /** Fill nun's image */
   setNumImage(name);
 
   /** Add as many rounds exist in the local storage */
   rounds.forEach((round) => {
-    addRound(round.space, round.movement, round.event);
+    addRound(round.space, round.movement, round.item);
   });
 
   /** Add a new round */
@@ -46,7 +46,7 @@ export function populateSheetFromStorage() {
 
 export function selectNun(newNun) {
   localRounds.name = newNun;
-  localRounds.startAt = nunsInitials[newNun];
+  localRounds.startAt = nunsInitialSpaces[newNun];
 
   saveToLocalStorage();
   setNumImage(newNun);
@@ -75,7 +75,7 @@ export function startNextTurn() {
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
   const inputSpace = lastRow.querySelector(".space");
   const inputMovement = lastRow.querySelector(".movement");
-  const inputEvent = lastRow.querySelector(".event");
+  const inputItem = lastRow.querySelector(".item");
 
   if (inputSpace.value === "" || inputMovement.value === "") {
     lastRow.classList.add("animate__animated");
@@ -101,7 +101,7 @@ export function startNextTurn() {
   localRounds.rounds.push({
     space: inputSpace.value,
     movement: inputMovement.value,
-    event: inputEvent.value,
+    item: inputItem.value,
   });
 
   saveToLocalStorage();
@@ -135,17 +135,21 @@ export function confirmResetGame() {
 /** PRIVATE METHODS */
 
 function openGame() {
-  const { sheetEmpty, sheetForm } = objDom;
+  const { nunSelect, sheetEmpty, sheetForm } = objDom;
 
   sheetEmpty.style.display = "none";
   sheetForm.style.display = "block";
+
+  nunSelect.disabled = true;
 }
 
 function closeGame() {
-  const { sheetEmpty, sheetForm } = objDom;
+  const { nunSelect, sheetEmpty, sheetForm } = objDom;
 
   sheetEmpty.style.display = "block";
   sheetForm.style.display = "none";
+
+  nunSelect.disabled = false;
 }
 
 function addRound(_space, _movement, _event) {
@@ -175,6 +179,7 @@ function addRound(_space, _movement, _event) {
   }
 
   /** Movement */
+
   const movementWrapper = document.createElement("div");
   movementWrapper.className = "select-wrapper";
 
@@ -199,6 +204,7 @@ function addRound(_space, _movement, _event) {
   movementWrapper.append(movementSelect);
 
   /** Items */
+
   const itemWrapper = document.createElement("div");
   itemWrapper.className = "select-wrapper";
 
