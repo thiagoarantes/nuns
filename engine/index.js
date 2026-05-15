@@ -1,4 +1,9 @@
 import { nunsInitials } from "./defaults.js";
+import {
+  saveToLocal,
+  setNumImage,
+  populateSheetFromStorage,
+} from "./methods.js";
 
 const objSheetForm = document.querySelector(".sheet-form");
 const objSheetEmpty = document.querySelector(".sheet-empty");
@@ -14,36 +19,6 @@ const localRounds = JSON.parse(localStorage.getItem("tarantes-nuns")) || {
   startAt: 0,
   rounds: [],
 };
-
-function saveToLocal() {
-  localStorage.setItem("tarantes-nuns", JSON.stringify(localRounds));
-}
-
-function setNumImage(name) {
-  document.body.className = name?.toLowerCase();
-}
-
-function populateSheetFromStorage() {
-  const { name, rounds } = localRounds;
-
-  /** Fill nun's name */
-  const nunSelect = document.querySelector(".nun");
-  nunSelect.value = name;
-
-  /** Fill nun's image */
-  setNumImage(name);
-
-  /** Add as many rounds exist in the local storage */
-  rounds.forEach((round, i) => {
-    addRound(i + 1, round.space, round.mvmt, round.evnt);
-  });
-
-  /** Add a new round */
-  currentRound = rounds.length;
-  addRound(++currentRound);
-
-  !!name && openGame();
-}
 
 function addRound(roundNumber, _space, _mvmt, _evnt) {
   const newRow = document.createElement("div");
@@ -155,7 +130,7 @@ function closeGame() {
   objSheetForm.style.display = "none";
 }
 
-populateSheetFromStorage();
+populateSheetFromStorage(localRounds, currentRound);
 
 /**
  * ALL EVENTS
@@ -168,7 +143,7 @@ document.querySelector("select.nun").addEventListener("change", (event) => {
   localRounds.name = newNun;
   localRounds.startAt = nunsInitials[newNun];
 
-  saveToLocal();
+  saveToLocal(localRounds);
 
   /** Fill nun's image */
   setNumImage(newNun);
@@ -186,11 +161,11 @@ document
 
     objSheetRows.innerHTML = "";
 
-    saveToLocal();
+    saveToLocal(localRounds);
 
     currentRound = 1;
 
-    populateSheetFromStorage();
+    populateSheetFromStorage(localRounds, currentRound);
     toggleModal();
 
     objButton.removeAttribute("disabled");
@@ -249,7 +224,7 @@ document.querySelector("button.add-new-round").addEventListener("click", () => {
     evnt: inputEvent.value,
   });
 
-  saveToLocal();
+  saveToLocal(localRounds);
 
   /** Step 3 - Create new round */
 
