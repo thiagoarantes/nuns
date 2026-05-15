@@ -13,3 +13,8 @@ export const nunsMovements = {
   Walking: "W",
   Running: "R",
 };
+
+export const nunsItems = {
+  Key: "K",
+  "Secret-Wish": "SW",
+};

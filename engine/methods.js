@@ -1,5 +1,5 @@
-import { nunsInitials, nunsMovements } from "./defaults.js";
-import { LOCAL_STORAGE_KEY } from "./constants.js";
+import { nunsInitials, nunsItems, nunsMovements } from "./defaults.js";
+import { LOCAL_STORAGE_KEY, MAX_ROUNDS } from "./constants.js";
 
 /** INITIAL STATE */
 const objDom = {
@@ -151,6 +151,9 @@ function closeGame() {
 function addRound(_space, _movement, _event) {
   const { buttonNewRound, sheetRows } = objDom;
 
+  const movementOptions = [];
+  const itemsOptions = [];
+
   currentRound = currentRound + 1;
 
   const newRow = document.createElement("div");
@@ -178,8 +181,6 @@ function addRound(_space, _movement, _event) {
   const movementSelect = document.createElement("select");
   movementSelect.className = "movement";
 
-  const movementOptions = [];
-
   Object.values(nunsMovements).forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
@@ -197,31 +198,33 @@ function addRound(_space, _movement, _event) {
 
   movementWrapper.append(movementSelect);
 
-  /** Event */
-  const eventWrapper = document.createElement("div");
-  eventWrapper.className = "select-wrapper";
+  /** Items */
+  const itemWrapper = document.createElement("div");
+  itemWrapper.className = "select-wrapper";
 
-  const eventSelect = document.createElement("select");
-  eventSelect.className = "event";
+  const itemSelect = document.createElement("select");
+  itemSelect.className = "item";
 
-  const optionK = document.createElement("option");
-  optionK.innerHTML = "K";
+  Object.values(nunsItems).forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.innerHTML = value;
 
-  const optionSW = document.createElement("option");
-  optionSW.innerHTML = "SW";
+    itemsOptions.push(option);
+  });
 
-  eventSelect.append(document.createElement("option"), optionK, optionSW);
+  itemSelect.append(document.createElement("option"), ...itemsOptions);
 
   if (_event !== undefined) {
-    eventSelect.disabled = true;
-    eventSelect.value = _event;
+    itemSelect.disabled = true;
+    itemSelect.value = _event;
   }
 
-  eventWrapper.append(eventSelect);
+  itemWrapper.append(itemSelect);
 
-  newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
+  newRow.append(roundDiv, spaceInput, movementWrapper, itemWrapper);
 
-  if (currentRound >= 15) {
+  if (currentRound >= MAX_ROUNDS) {
     buttonNewRound.innerHTML = "No more turns";
     buttonNewRound.setAttribute("disabled", true);
   } else {
