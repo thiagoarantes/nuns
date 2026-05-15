@@ -1,6 +1,5 @@
 import { nunsInitials } from "./defaults.js";
-
-const LOCAL_STORAGE_KEY = "tarantes-nuns";
+import { LOCAL_STORAGE_KEY } from "./constants.js";
 
 export function getFromLocal() {
   return (
