@@ -14,11 +14,11 @@ import {
  * GLOBAL VARIABLES
  */
 
-const objSheetForm = document.querySelector(".sheet-form");
-const objSheetEmpty = document.querySelector(".sheet-empty");
-const objSheetRows = document.querySelector(".sheet-rows");
-const objButton = document.querySelector(".button-primary");
-const objModal = document.querySelector(".modal");
+const domSheetForm = document.querySelector(".sheet-form");
+const domSheetEmpty = document.querySelector(".sheet-empty");
+const domSheetRows = document.querySelector(".sheet-rows");
+const domButton = document.querySelector(".button-primary");
+const domModal = document.querySelector(".modal");
 
 const localRounds = getFromLocal();
 
@@ -28,7 +28,14 @@ let currentRound = 1;
  * INIT
  */
 
-populateSheetFromStorage(localRounds, currentRound, objButton, objSheetRows);
+populateSheetFromStorage(
+  localRounds,
+  currentRound,
+  domButton,
+  domSheetRows,
+  domSheetEmpty,
+  domSheetForm,
+);
 
 /**
  * ALL EVENTS
@@ -43,7 +50,7 @@ document.querySelector("select.nun").addEventListener("change", (event) => {
 
   saveToLocal(localRounds);
   setNumImage(newNun);
-  openGame(objSheetEmpty, objSheetForm);
+  openGame(domSheetEmpty, domSheetForm);
 });
 
 /** Modal - Confirm Reset Game */
@@ -54,7 +61,7 @@ document
     localRounds.startAt = 0;
     localRounds.rounds = [];
 
-    objSheetRows.innerHTML = "";
+    domSheetRows.innerHTML = "";
 
     saveToLocal(localRounds);
 
@@ -63,29 +70,31 @@ document
     populateSheetFromStorage(
       localRounds,
       currentRound,
-      objButton,
-      objSheetRows,
+      domButton,
+      domSheetRows,
+      domSheetEmpty,
+      domSheetForm,
     );
-    toggleModal(objModal);
+    toggleModal(domModal);
 
-    objButton.removeAttribute("disabled");
+    domButton.removeAttribute("disabled");
 
-    closeGame(objSheetEmpty, objSheetForm);
+    closeGame(domSheetEmpty, domSheetForm);
   });
 
 /** Main Reset Game */
 document.querySelector("button.reset-game").addEventListener("click", () => {
-  toggleModal(objModal);
+  toggleModal(domModal);
 });
 
 /** Modal - Close Button (X) */
 document.querySelector("span.close").addEventListener("click", () => {
-  toggleModal(objModal);
+  toggleModal(domModal);
 });
 
 /** Modal - Cancel Button */
 document.querySelector("button.cancel-close").addEventListener("click", () => {
-  toggleModal(objModal);
+  toggleModal(domModal);
 });
 
 /** Start Next Turn */
@@ -129,5 +138,5 @@ document.querySelector("button.add-new-round").addEventListener("click", () => {
 
   /** Step 3 - Create new round */
 
-  addRound(++currentRound, objButton, currentRound, objSheetRows);
+  addRound(++currentRound, domButton, domSheetRows);
 });

@@ -21,6 +21,8 @@ export function populateSheetFromStorage(
   currentRound,
   objButton,
   objSheetRows,
+  objSheetEmpty,
+  objSheetForm,
 ) {
   const { name, rounds } = localRounds;
 
@@ -38,15 +40,14 @@ export function populateSheetFromStorage(
 
   /** Add a new round */
   currentRound = rounds.length;
-  addRound(++currentRound, objButton, currentRound, objSheetRows);
+  addRound(++currentRound, objButton, objSheetRows);
 
-  !!name && openGame();
+  !!name && openGame(objSheetEmpty, objSheetForm);
 }
 
 export function addRound(
   roundNumber,
   objButton,
-  currentRound,
   objSheetRows,
   _space,
   _movement,
@@ -136,7 +137,7 @@ export function addRound(
     objButton.innerHTML = "No more turns";
     objButton.setAttribute("disabled", true);
   } else {
-    objButton.innerHTML = `Start next turn [ ${currentRound + 1} ]`;
+    objButton.innerHTML = `Start next turn [ ${roundNumber + 1} ]`;
   }
 
   objSheetRows.append(newRow);
