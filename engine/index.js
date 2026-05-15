@@ -1,12 +1,9 @@
-import { nunsInitials } from "./defaults.js";
 import {
-  addRound,
-  closeGame,
+  confirmResetGame,
   getFromLocal,
-  openGame,
   populateSheetFromStorage,
-  saveToLocal,
-  setNumImage,
+  selectNun,
+  startNextTurn,
   toggleModal,
 } from "./methods.js";
 
@@ -43,43 +40,22 @@ populateSheetFromStorage(
 
 /** Select Nun */
 document.querySelector("select.nun").addEventListener("change", (event) => {
-  const newNun = event.target.value;
-
-  localRounds.name = newNun;
-  localRounds.startAt = nunsInitials[newNun];
-
-  saveToLocal(localRounds);
-  setNumImage(newNun);
-  openGame(domSheetEmpty, domSheetForm);
+  selectNun(localRounds, domSheetEmpty, domSheetForm);
 });
 
 /** Modal - Confirm Reset Game */
 document
   .querySelector("button.confirm-reset-game")
   .addEventListener("click", () => {
-    localRounds.name = null;
-    localRounds.startAt = 0;
-    localRounds.rounds = [];
-
-    domSheetRows.innerHTML = "";
-
-    saveToLocal(localRounds);
-
-    currentRound = 1;
-
-    populateSheetFromStorage(
+    confirmResetGame(
       localRounds,
       currentRound,
       domButton,
       domSheetRows,
       domSheetEmpty,
       domSheetForm,
+      domModal,
     );
-    toggleModal(domModal);
-
-    domButton.removeAttribute("disabled");
-
-    closeGame(domSheetEmpty, domSheetForm);
   });
 
 /** Main Reset Game */
@@ -99,44 +75,5 @@ document.querySelector("button.cancel-close").addEventListener("click", () => {
 
 /** Start Next Turn */
 document.querySelector("button.add-new-round").addEventListener("click", () => {
-  /** Step 0 - Check valid round */
-
-  const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
-  const inputSpace = lastRow.querySelector(".space");
-  const inputMovement = lastRow.querySelector(".movement");
-  const inputEvent = lastRow.querySelector(".event");
-
-  if (inputSpace.value === "" || inputMovement.value === "") {
-    lastRow.classList.add("animate__animated");
-    lastRow.classList.add("animate__shakeX");
-
-    setTimeout(() => {
-      lastRow.classList.remove("animate__animated");
-      lastRow.classList.remove("animate__shakeX");
-    }, 1000);
-
-    return;
-  }
-
-  /** Step 1 - Disable last round  */
-
-  const inputs = lastRow.querySelectorAll("input, select");
-
-  inputs.forEach((input) => {
-    input.setAttribute("disabled", true);
-  });
-
-  /** Step 2 - Save last round to local storage */
-
-  localRounds.rounds.push({
-    space: inputSpace.value,
-    mvmt: inputMovement.value,
-    evnt: inputEvent.value,
-  });
-
-  saveToLocal(localRounds);
-
-  /** Step 3 - Create new round */
-
-  addRound(++currentRound, domButton, domSheetRows);
+  startNextTurn(localRounds, currentRound, domButton, domSheetRows);
 });

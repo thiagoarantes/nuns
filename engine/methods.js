@@ -1,19 +1,15 @@
+import { nunsInitials } from "./defaults.js";
+
+const LOCAL_STORAGE_KEY = "tarantes-nuns";
+
 export function getFromLocal() {
   return (
-    JSON.parse(localStorage.getItem("tarantes-nuns")) || {
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {
       name: null,
       startAt: 0,
       rounds: [],
     }
   );
-}
-
-export function saveToLocal(localRounds) {
-  localStorage.setItem("tarantes-nuns", JSON.stringify(localRounds));
-}
-
-export function setNumImage(name) {
-  document.body.className = name?.toLowerCase();
 }
 
 export function populateSheetFromStorage(
@@ -45,7 +41,125 @@ export function populateSheetFromStorage(
   !!name && openGame(objSheetEmpty, objSheetForm);
 }
 
-export function addRound(
+export function selectNun(localRounds, domSheetEmpty, domSheetForm) {
+  const newNun = event.target.value;
+
+  localRounds.name = newNun;
+  localRounds.startAt = nunsInitials[newNun];
+
+  saveToLocal(localRounds);
+  setNumImage(newNun);
+  openGame(domSheetEmpty, domSheetForm);
+}
+
+export function setNumImage(name) {
+  document.body.className = name?.toLowerCase();
+}
+
+export function toggleModal(objModal) {
+  if (objModal.classList.contains("open")) {
+    objModal.classList.remove("open");
+    return;
+  }
+
+  objModal.classList.add("open");
+}
+
+export function startNextTurn(
+  localRounds,
+  currentRound,
+  domButton,
+  domSheetRows,
+) {
+  /** Step 0 - Check valid round */
+
+  const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
+  const inputSpace = lastRow.querySelector(".space");
+  const inputMovement = lastRow.querySelector(".movement");
+  const inputEvent = lastRow.querySelector(".event");
+
+  if (inputSpace.value === "" || inputMovement.value === "") {
+    lastRow.classList.add("animate__animated");
+    lastRow.classList.add("animate__shakeX");
+
+    setTimeout(() => {
+      lastRow.classList.remove("animate__animated");
+      lastRow.classList.remove("animate__shakeX");
+    }, 1000);
+
+    return;
+  }
+
+  /** Step 1 - Disable last round  */
+
+  const inputs = lastRow.querySelectorAll("input, select");
+
+  inputs.forEach((input) => {
+    input.setAttribute("disabled", true);
+  });
+
+  /** Step 2 - Save last round to local storage */
+
+  localRounds.rounds.push({
+    space: inputSpace.value,
+    mvmt: inputMovement.value,
+    evnt: inputEvent.value,
+  });
+
+  saveToLocal(localRounds);
+
+  /** Step 3 - Create new round */
+
+  addRound(++currentRound, domButton, domSheetRows);
+}
+
+export function confirmResetGame(
+  localRounds,
+  currentRound,
+  domButton,
+  domSheetRows,
+  domSheetEmpty,
+  domSheetForm,
+  domModal,
+) {
+  localRounds.name = null;
+  localRounds.startAt = 0;
+  localRounds.rounds = [];
+
+  domSheetRows.innerHTML = "";
+
+  saveToLocal(localRounds);
+
+  currentRound = 1;
+
+  populateSheetFromStorage(
+    localRounds,
+    currentRound,
+    domButton,
+    domSheetRows,
+    domSheetEmpty,
+    domSheetForm,
+  );
+  toggleModal(domModal);
+
+  domButton.removeAttribute("disabled");
+
+  closeGame(domSheetEmpty, domSheetForm);
+}
+
+/** PRIVATE METHODS */
+
+function openGame(objSheetEmpty, objSheetForm) {
+  objSheetEmpty.style.display = "none";
+  objSheetForm.style.display = "block";
+}
+
+function closeGame(objSheetEmpty, objSheetForm) {
+  objSheetEmpty.style.display = "block";
+  objSheetForm.style.display = "none";
+}
+
+function addRound(
   roundNumber,
   objButton,
   objSheetRows,
@@ -143,21 +257,6 @@ export function addRound(
   objSheetRows.append(newRow);
 }
 
-export function toggleModal(objModal) {
-  if (objModal.classList.contains("open")) {
-    objModal.classList.remove("open");
-    return;
-  }
-
-  objModal.classList.add("open");
-}
-
-export function openGame(objSheetEmpty, objSheetForm) {
-  objSheetEmpty.style.display = "none";
-  objSheetForm.style.display = "block";
-}
-
-export function closeGame(objSheetEmpty, objSheetForm) {
-  objSheetEmpty.style.display = "block";
-  objSheetForm.style.display = "none";
+function saveToLocal(localRounds) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRounds));
 }
