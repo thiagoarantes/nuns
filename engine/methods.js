@@ -16,7 +16,7 @@ const localRounds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {
   rounds: [],
 };
 
-let currentRound = 1;
+let currentRound = 0;
 
 /** PUBLIC METHODS */
 
@@ -151,6 +151,8 @@ function closeGame() {
 function addRound(_space, _movement, _event) {
   const { buttonNewRound, sheetRows } = objDom;
 
+  currentRound = currentRound + 1;
+
   const newRow = document.createElement("div");
   newRow.className = "sheet-row";
 
@@ -218,8 +220,6 @@ function addRound(_space, _movement, _event) {
   eventWrapper.append(eventSelect);
 
   newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
-
-  currentRound = currentRound + 1;
 
   if (currentRound >= 15) {
     buttonNewRound.innerHTML = "No more turns";
