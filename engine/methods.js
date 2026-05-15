@@ -167,6 +167,17 @@ function addRound(_space, _movement, _event) {
   roundDiv.className = "round";
   roundDiv.innerHTML = currentRound;
 
+  /** Space */
+
+  const spaceInput = document.createElement("input");
+  spaceInput.className = "space";
+  spaceInput.setAttribute("type", "number");
+
+  if (_space !== undefined) {
+    spaceInput.disabled = true;
+    spaceInput.value = _space;
+  }
+
   /** Movement */
 
   const movementWrapper = document.createElement("div");
@@ -174,6 +185,9 @@ function addRound(_space, _movement, _event) {
 
   const movementSelect = document.createElement("select");
   movementSelect.className = "movement";
+  movementSelect.addEventListener("change", (event) => {
+    definePossibleMovements(event.target.value, spaceInput);
+  });
 
   Object.values(nunsMovements).forEach((value) => {
     const option = document.createElement("option");
@@ -191,17 +205,6 @@ function addRound(_space, _movement, _event) {
   }
 
   movementWrapper.append(movementSelect);
-
-  /** Space */
-
-  const spaceInput = document.createElement("input");
-  spaceInput.className = "space";
-  spaceInput.setAttribute("type", "number");
-
-  if (_space !== undefined) {
-    spaceInput.disabled = true;
-    spaceInput.value = _space;
-  }
 
   /** Items */
 
@@ -242,4 +245,23 @@ function addRound(_space, _movement, _event) {
 
 function saveToLocalStorage() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRounds));
+}
+
+function getPreviousEndSpace() {
+  if (currentRound === 1) {
+    return nunsInitialSpaces[localRounds.name];
+  }
+
+  return localRounds.rounds[currentRound - 2].space;
+}
+
+function definePossibleMovements(item, spaceInput) {
+  if (item === nunsMovements["Standing-Still"]) {
+    spaceInput.value = getPreviousEndSpace();
+
+    return;
+  }
+
+  // TODO - All the other cases
+  spaceInput.value = "";
 }
