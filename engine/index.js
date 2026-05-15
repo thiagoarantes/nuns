@@ -1,6 +1,5 @@
 import {
   confirmResetGame,
-  getFromLocal,
   populateSheetFromStorage,
   selectNun,
   startNextTurn,
@@ -8,17 +7,10 @@ import {
 } from "./methods.js";
 
 /**
- * GLOBAL VARIABLES
- */
-
-const localRounds = getFromLocal();
-let currentRound = 1;
-
-/**
  * INIT
  */
 
-populateSheetFromStorage(localRounds, currentRound);
+populateSheetFromStorage();
 
 /**
  * ALL EVENTS
@@ -26,14 +18,14 @@ populateSheetFromStorage(localRounds, currentRound);
 
 /** Select Nun */
 document.querySelector("select.nun").addEventListener("change", (event) => {
-  selectNun(localRounds, event.target.value);
+  selectNun(event.target.value);
 });
 
 /** Modal - Confirm Reset Game */
 document
   .querySelector("button.confirm-reset-game")
   .addEventListener("click", () => {
-    confirmResetGame(localRounds, currentRound);
+    confirmResetGame();
   });
 
 /** Main Reset Game */
@@ -53,5 +45,5 @@ document.querySelector("button.cancel-close").addEventListener("click", () => {
 
 /** Start Next Turn */
 document.querySelector("button.add-new-round").addEventListener("click", () => {
-  startNextTurn(localRounds, currentRound);
+  startNextTurn();
 });

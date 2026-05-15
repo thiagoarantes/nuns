@@ -10,19 +10,17 @@ const objDom = {
   resetModal: document.querySelector(".modal"),
 };
 
+const localRounds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {
+  name: null,
+  startAt: 0,
+  rounds: [],
+};
+
+let currentRound = 1;
+
 /** PUBLIC METHODS */
 
-export function getFromLocal() {
-  return (
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {
-      name: null,
-      startAt: 0,
-      rounds: [],
-    }
-  );
-}
-
-export function populateSheetFromStorage(localRounds, currentRound) {
+export function populateSheetFromStorage() {
   const { name, rounds } = localRounds;
 
   /** Fill nun's name */
@@ -33,22 +31,24 @@ export function populateSheetFromStorage(localRounds, currentRound) {
   setNumImage(name);
 
   /** Add as many rounds exist in the local storage */
-  rounds.forEach((round, i) => {
-    addRound(i + 1, round.space, round.mvmt, round.evnt);
+  rounds.forEach((round) => {
+    addRound(round.space, round.movement, round.event);
   });
 
   /** Add a new round */
   currentRound = rounds.length;
-  addRound(++currentRound);
+  addRound();
 
-  !!name && openGame();
+  if (name) {
+    openGame();
+  }
 }
 
-export function selectNun(localRounds, newNun) {
+export function selectNun(newNun) {
   localRounds.name = newNun;
   localRounds.startAt = nunsInitials[newNun];
 
-  saveToLocal(localRounds);
+  saveToLocal();
   setNumImage(newNun);
   openGame();
 }
@@ -69,7 +69,7 @@ export function toggleModal() {
   modal.classList.add("open");
 }
 
-export function startNextTurn(localRounds, currentRound) {
+export function startNextTurn() {
   /** Step 0 - Check valid round */
 
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
@@ -98,21 +98,20 @@ export function startNextTurn(localRounds, currentRound) {
   });
 
   /** Step 2 - Save last round to local storage */
-
   localRounds.rounds.push({
     space: inputSpace.value,
-    mvmt: inputMovement.value,
-    evnt: inputEvent.value,
+    movement: inputMovement.value,
+    event: inputEvent.value,
   });
 
-  saveToLocal(localRounds);
+  saveToLocal();
 
   /** Step 3 - Create new round */
 
-  addRound(++currentRound);
+  addRound();
 }
 
-export function confirmResetGame(localRounds, currentRound) {
+export function confirmResetGame() {
   const { sheetRows, buttonNewRound } = objDom;
 
   localRounds.name = null;
@@ -121,11 +120,11 @@ export function confirmResetGame(localRounds, currentRound) {
 
   sheetRows.innerHTML = "";
 
-  saveToLocal(localRounds);
+  saveToLocal();
 
   currentRound = 1;
 
-  populateSheetFromStorage(localRounds, currentRound);
+  populateSheetFromStorage();
   toggleModal();
 
   buttonNewRound.removeAttribute("disabled");
@@ -149,15 +148,17 @@ function closeGame() {
   sheetForm.style.display = "none";
 }
 
-function addRound(roundNumber, _space, _movement, _event) {
+function addRound(_space, _movement, _event) {
   const { buttonNewRound, sheetRows } = objDom;
+
+  currentRound = currentRound + 1;
 
   const newRow = document.createElement("div");
   newRow.className = "sheet-row";
 
   const roundDiv = document.createElement("div");
   roundDiv.className = "round";
-  roundDiv.innerHTML = roundNumber;
+  roundDiv.innerHTML = currentRound;
 
   /** Space */
 
@@ -232,16 +233,16 @@ function addRound(roundNumber, _space, _movement, _event) {
 
   newRow.append(roundDiv, spaceInput, movementWrapper, eventWrapper);
 
-  if (roundNumber >= 15) {
+  if (currentRound >= 15) {
     buttonNewRound.innerHTML = "No more turns";
     buttonNewRound.setAttribute("disabled", true);
   } else {
-    buttonNewRound.innerHTML = `Start next turn [ ${roundNumber + 1} ]`;
+    buttonNewRound.innerHTML = `Start next turn [ ${currentRound + 1} ]`;
   }
 
   sheetRows.append(newRow);
 }
 
-function saveToLocal(localRounds) {
+function saveToLocal() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRounds));
 }
