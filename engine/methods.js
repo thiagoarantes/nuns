@@ -237,9 +237,7 @@ function addRound(_space, _movement, _event) {
     buttonNewRound.innerHTML = "No more turns";
     buttonNewRound.setAttribute("disabled", true);
   } else {
-    buttonNewRound.innerHTML = `<span class="material-symbols-outlined" data-icon="play_arrow"
-              >play_arrow</span
-            >Start next turn [ ${currentRound + 1} ]`;
+    buttonNewRound.innerHTML = `<span class="material-symbols-outlined">subdirectory_arrow_right</span>Start next turn [ ${currentRound + 1} ]`;
   }
 
   sheetRows.append(newRow);

@@ -332,7 +332,7 @@ select:focus-visible {
 
 .close {
   position: absolute;
-  top: 4px;
+  top: 14px;
   right: 14px;
   color: var(--main-color);
   font-size: 28px;
