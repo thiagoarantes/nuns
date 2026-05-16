@@ -260,7 +260,7 @@ select:focus-visible {
   border: none;
 }
 
-.button.button-primary:hover {
+.button.button-primary:hover:not[disabled] {
   background-color: var(--secondary-action);
   cursor: pointer;
 }
@@ -274,7 +274,7 @@ select:focus-visible {
   height: 42px;
 }
 
-.button.button-secondary:hover {
+.button.button-secondary:hover:not[disabled] {
   color: var(--secondary-action);
   border-color: var(--secondary-action);
   cursor: pointer;

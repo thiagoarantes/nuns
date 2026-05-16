@@ -171,6 +171,7 @@ function addRound(_space, _movement, _event) {
 
   const spaceInput = document.createElement("input");
   spaceInput.className = "space";
+  spaceInput.id = `inputSpace${currentRound}`;
   spaceInput.setAttribute("type", "number");
 
   if (_space !== undefined) {
@@ -184,6 +185,7 @@ function addRound(_space, _movement, _event) {
   movementWrapper.className = "select-wrapper";
 
   const movementSelect = document.createElement("select");
+  movementSelect.id = `movementSelect${currentRound}`;
   movementSelect.className = "movement";
   movementSelect.addEventListener("change", (event) => {
     definePossibleMovements(event.target.value, spaceInput);
@@ -212,6 +214,7 @@ function addRound(_space, _movement, _event) {
   itemWrapper.className = "select-wrapper";
 
   const itemSelect = document.createElement("select");
+  itemSelect.id = `itemSelect${currentRound}`;
   itemSelect.className = "item";
 
   Object.values(nunsItems).forEach((value) => {
@@ -234,7 +237,7 @@ function addRound(_space, _movement, _event) {
   newRow.append(roundDiv, movementWrapper, spaceInput, itemWrapper);
 
   if (currentRound >= MAX_ROUNDS) {
-    buttonNewRound.innerHTML = "No more turns";
+    buttonNewRound.innerHTML = `<span class="material-symbols-outlined">skull</span>Game Over`;
     buttonNewRound.setAttribute("disabled", true);
   } else {
     buttonNewRound.innerHTML = `<span class="material-symbols-outlined">subdirectory_arrow_right</span>Start next turn [ ${currentRound + 1} ]`;
