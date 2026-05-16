@@ -19,7 +19,7 @@
 
 * {
   font-family: var(--font-1);
-  transition: ease-out 0.3s all;
+  transition: ease-out 0.2s all;
 }
 
 /* Theme by nun */
@@ -176,6 +176,10 @@ body {
   color: var(--main-color);
   align-self: center;
   justify-self: center;
+}
+
+.movement::after {
+  content: "Mvmt";
 }
 
 .sheet-buttons button {
@@ -403,4 +407,8 @@ select:focus-visible {
   .sheet-empty {
     margin-top: 96px;
   }
+
+  .movement::after {
+  content: "Movement";
+}
 }
