@@ -13,8 +13,7 @@
   --font-2: "Secular One", sans-serif;
   --background-light: #ececec;
   --background-secondary: #e7e7e7;
-  --grid-mobile: 20px repeat(3, 1fr);
-  --grid-desktop: 40px repeat(3, 1fr);
+  --grid-columns: 20px repeat(3, minmax(0, 1fr));
 }
 
 * {
@@ -136,7 +135,7 @@ body {
 
 .sheet-title {
   display: grid;
-  grid-template-columns: var(--grid-mobile);
+  grid-template-columns: var(--grid-columns);
   grid-gap: 0.5em;
   padding: 1rem;
   height: 26px;
@@ -157,7 +156,7 @@ body {
 
 .sheet-row {
   display: grid;
-  grid-template-columns: var(--grid-mobile);
+  grid-template-columns: var(--grid-columns);
   grid-gap: 0.5em;
   margin-bottom: 1rem;
 }
