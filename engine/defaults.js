@@ -8,15 +8,15 @@ export const nunsInitialSpaces = {
 };
 
 export const nunsMovements = {
-  "Standing-Still": "SS",
-  Sneaking: "S",
-  Walking: "W",
-  Running: "R",
+  Still: "SS",
+  Sneak: "S",
+  Walk: "W",
+  Run: "R",
 };
 
 export const nunsItems = {
   Key: "K",
-  "Secret-Wish": "SW",
+  Wish: "SW",
 };
 
 export const connections = {

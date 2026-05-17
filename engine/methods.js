@@ -194,7 +194,7 @@ function addRound(_space, _movement, _event) {
   Object.values(nunsMovements).forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
-    option.innerHTML = value;
+    option.innerHTML = getKeyByValue(nunsMovements, value);
 
     movementOptions.push(option);
   });
@@ -220,7 +220,7 @@ function addRound(_space, _movement, _event) {
   Object.values(nunsItems).forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
-    option.innerHTML = value;
+    option.innerHTML = getKeyByValue(nunsItems, value);
 
     itemsOptions.push(option);
   });
@@ -267,4 +267,10 @@ function definePossibleMovements(item, spaceInput) {
 
   // TODO - All the other cases
   spaceInput.value = "";
+}
+
+function getKeyByValue(object, value) {
+  return Object.keys(object)
+    .find((key) => object[key] === value)
+    .replace("-", " ");
 }
