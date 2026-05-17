@@ -2,7 +2,7 @@ import {
   confirmResetGame,
   populateSheetFromStorage,
   selectNun,
-  startNextTurn,
+  startNextRound,
   toggleModal,
 } from "./methods.js";
 
@@ -45,5 +45,5 @@ document.querySelector("button.cancel-close").addEventListener("click", () => {
 
 /** Start Next Turn */
 document.querySelector("button.add-new-round").addEventListener("click", () => {
-  startNextTurn();
+  startNextRound();
 });

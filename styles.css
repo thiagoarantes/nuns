@@ -81,19 +81,19 @@ body {
 }
 
 .sheet-header > div {
-  position: relative;
+  align-items: center;
   display: flex;
   gap: 1.5rem;
   padding: 1rem;
-  align-items: center;
+  position: relative;
 }
 
 .sheet-header > div label {
-  height: 26px;
-  color: var(--main-color);
   align-items: center;
+  color: var(--main-color);
   font-family: var(--font-2);
   font-size: 1.2rem;
+  height: 26px;
 }
 
 .sheet-header .select-wrapper {
@@ -103,13 +103,13 @@ body {
 /* Nuns pics */
 
 .nun-pic {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  bottom: 0;
-  width: 55px;
-  background-size: contain;
   background-repeat: no-repeat;
+  background-size: contain;
+  bottom: 0;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 55px;
 }
 
 .angelica .nun-pic {
@@ -134,15 +134,15 @@ body {
 /* Sheets lines */
 
 .sheet-title {
-  display: grid;
-  grid-template-columns: var(--grid-columns);
-  grid-gap: 0.5em;
-  padding: 1rem;
-  height: 26px;
-  color: var(--main-color);
   align-items: center;
-  font-size: 1.2rem;
   background-color: var(--background-secondary);
+  color: var(--main-color);
+  display: grid;
+  font-size: 1.2rem;
+  grid-gap: 0.5em;
+  grid-template-columns: var(--grid-columns);
+  height: 26px;
+  padding: 1rem;
 }
 
 .sheet-title > div {
@@ -156,8 +156,8 @@ body {
 
 .sheet-row {
   display: grid;
-  grid-template-columns: var(--grid-columns);
   grid-gap: 0.5em;
+  grid-template-columns: var(--grid-columns);
   margin-bottom: 1rem;
 }
 
@@ -170,10 +170,10 @@ body {
 }
 
 .round {
+  align-self: center;
+  color: var(--main-color);
   font-family: var(--font-2);
   font-size: 1.2rem;
-  color: var(--main-color);
-  align-self: center;
   justify-self: center;
 }
 
@@ -191,40 +191,57 @@ body {
 }
 
 .select-wrapper::before {
-  font: var(--fa-font-solid);
+  -webkit-font-smoothing: antialiased;
+  align-items: center;
+  bottom: 1px;
   color: var(--secondary-action);
   content: "\f078";
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  bottom: 1px;
-  width: 32px;
   display: flex;
-  align-items: center;
+  font: var(--fa-font-solid);
   justify-content: center;
+  position: absolute;
+  right: 1px;
   text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
+  top: 1px;
+  width: 32px;
+}
+
+.select-wrapper.disabled::before {
+  display: none;
+}
+
+.select-wrapper span {
+  color: var(--main-color);
+}
+
+.select-wrapper span.key {
+  font-size: 36px;
+}
+
+.select-wrapper span.wish {
+  font-size: 28px;
 }
 
 input,
 select {
-  border: 1px solid var(--main-color);
-  border-radius: var(--radius);
-  background-color: transparent;
-  padding: 0.5rem;
-  font-size: 1rem;
-  appearance: none;
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border-radius: var(--radius);
+  border: 1px solid var(--main-color);
+  font-size: 1rem;
+  padding: 0.5rem;
   text-indent: 1px;
   text-overflow: "";
 }
 
 input[disabled],
-select[disabled] {
-  opacity: 1;
+select:not(.nun)[disabled] {
+  background-color: transparent;
+  border-color: transparent;
   color: var(--secondary-color);
-  background-color: var(--background-light);
+  opacity: 1;
 }
 
 input:focus-visible,
@@ -233,30 +250,30 @@ select:focus-visible {
 }
 
 .select-wrapper select {
-  width: 100%;
   padding-right: 32px;
   position: relative;
+  width: 100%;
   z-index: 1;
 }
 
 /* Buttons */
 
 .button {
-  border-radius: 8px;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  height: 42px;
-  min-width: 70px;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  border-radius: 8px;
+  display: flex;
+  font-size: 1rem;
   gap: 8px;
+  height: 42px;
+  justify-content: center;
+  min-width: 70px;
+  padding: 0.5rem 1rem;
 }
 
 .button.button-primary {
   background-color: var(--main-action);
-  color: var(--white);
   border: none;
+  color: var(--white);
 }
 
 .button.button-primary:hover:not[disabled] {
@@ -266,39 +283,38 @@ select:focus-visible {
 
 .button.button-secondary {
   background-color: var(--white);
-  color: var(--main-action);
-  padding: 0.5rem 1rem;
   border: 2px solid var(--main-action);
+  color: var(--main-action);
   font-size: 1rem;
   height: 42px;
+  padding: 0.5rem 1rem;
 }
 
 .button.button-secondary:hover:not[disabled] {
-  color: var(--secondary-action);
   border-color: var(--secondary-action);
+  color: var(--secondary-action);
   cursor: pointer;
 }
 
 .button:focus-visible {
-  outline: 3px solid var(--main-action);
   outline-offset: 3px;
+  outline: 3px solid var(--main-action);
 }
 
 /* Modal */
 
 .modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  left: 0;
   opacity: 0;
+  overflow: auto;
+  padding-top: 100px;
   pointer-events: none;
   position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
 
 .modal.open {
@@ -308,14 +324,14 @@ select:focus-visible {
 
 .modal-content {
   background-color: var(--white);
-  margin: auto;
-  padding: 2rem;
-  padding-top: 3rem;
-  width: fit-content;
-  position: relative;
-  text-align: center;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  margin: auto;
+  padding-top: 3rem;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+  width: fit-content;
 }
 
 .modal.open .modal-content {
@@ -324,8 +340,8 @@ select:focus-visible {
 
 .modal-content div {
   display: flex;
-  justify-content: center;
   gap: 12px;
+  justify-content: center;
   margin-top: 30px;
 }
 
@@ -334,29 +350,29 @@ select:focus-visible {
 }
 
 .close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
   color: var(--main-color);
+  cursor: pointer;
   font-size: 28px;
   font-weight: bold;
-  cursor: pointer;
+  position: absolute;
+  right: 14px;
+  top: 14px;
 }
 
 /* Empty game */
 .sheet-empty {
-  font-family: var(--font-2);
-  text-align: center;
-  font-size: 1.5rem;
   color: var(--main-color);
+  font-family: var(--font-2);
+  font-size: 1.5rem;
   margin-top: 24px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
   html {
+    background-attachment: fixed;
     background-image: radial-gradient(var(--main-color) 1px, transparent 1px);
     background-size: 32px 32px;
-    background-attachment: fixed;
   }
 
   body {
@@ -364,31 +380,31 @@ select:focus-visible {
   }
 
   .form {
+    border-radius: 8px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     margin-top: 5rem;
-    border-radius: 8px;
   }
 
   .sheet-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     background-color: var(--white);
     box-shadow: var(--shadow);
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
   }
 
   .sheet-header > div {
-    max-width: 768px;
     margin: 0 auto;
+    max-width: 768px;
   }
 
   .sheet-buttons {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
     flex-direction: row-reverse;
+    gap: 1rem;
+    justify-content: center;
   }
 
   .sheet-buttons button {
@@ -408,6 +424,6 @@ select:focus-visible {
   }
 
   .movement::after {
-  content: "Movement";
-}
+    content: "Movement";
+  }
 }

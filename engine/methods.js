@@ -32,7 +32,7 @@ export function populateSheetFromStorage() {
 
   /** Add as many rounds exist in the local storage */
   rounds.forEach((round) => {
-    addRound(round.space, round.movement, round.item);
+    addRound(true, round.space, round.movement, round.item);
   });
 
   /** Add a new round */
@@ -69,7 +69,7 @@ export function toggleModal() {
   modal.classList.add("open");
 }
 
-export function startNextTurn() {
+export function startNextRound() {
   /** Step 0 - Check valid round */
 
   const lastRow = document.querySelectorAll(".sheet-row")[currentRound - 1];
@@ -95,6 +95,9 @@ export function startNextTurn() {
 
   inputs.forEach((input) => {
     input.setAttribute("disabled", true);
+    input.parentElement.classList.add("disabled");
+
+    replaceInputWithIcon(input);
   });
 
   /** Step 2 - Save last round to local storage */
@@ -141,6 +144,7 @@ function openGame() {
   sheetForm.style.display = "block";
 
   nunSelect.disabled = true;
+  nunSelect.parentElement.classList.add("disabled");
 }
 
 function closeGame() {
@@ -150,9 +154,10 @@ function closeGame() {
   sheetForm.style.display = "none";
 
   nunSelect.disabled = false;
+  nunSelect.parentElement.classList.remove("disabled");
 }
 
-function addRound(_space, _movement, _event) {
+function addRound(isBuildingList = false, _space, _movement, _event) {
   const { buttonNewRound, sheetRows } = objDom;
 
   const movementOptions = [];
@@ -182,7 +187,11 @@ function addRound(_space, _movement, _event) {
   /** Movement */
 
   const movementWrapper = document.createElement("div");
-  movementWrapper.className = "select-wrapper";
+  movementWrapper.classList.add("select-wrapper");
+
+  if (isBuildingList) {
+    movementWrapper.classList.add("disabled");
+  }
 
   const movementSelect = document.createElement("select");
   movementSelect.id = `movementSelect${currentRound}`;
@@ -211,7 +220,11 @@ function addRound(_space, _movement, _event) {
   /** Items */
 
   const itemWrapper = document.createElement("div");
-  itemWrapper.className = "select-wrapper";
+  itemWrapper.classList.add("select-wrapper");
+
+  if (isBuildingList) {
+    itemWrapper.classList.add("disabled");
+  }
 
   const itemSelect = document.createElement("select");
   itemSelect.id = `itemSelect${currentRound}`;
@@ -234,13 +247,15 @@ function addRound(_space, _movement, _event) {
 
   itemWrapper.append(itemSelect);
 
+  replaceInputWithIcon(itemSelect);
+
   newRow.append(roundDiv, movementWrapper, spaceInput, itemWrapper);
 
   if (currentRound >= MAX_ROUNDS) {
     buttonNewRound.innerHTML = `<span class="material-symbols-outlined">skull</span>Game Over`;
     buttonNewRound.setAttribute("disabled", true);
   } else {
-    buttonNewRound.innerHTML = `<span class="material-symbols-outlined">subdirectory_arrow_right</span>Start next turn [ ${currentRound + 1} ]`;
+    buttonNewRound.innerHTML = `<span class="material-symbols-outlined">subdirectory_arrow_right</span>Start Round ${currentRound + 1}`;
   }
 
   sheetRows.append(newRow);
@@ -259,18 +274,39 @@ function getPreviousEndSpace() {
 }
 
 function definePossibleMovements(item, spaceInput) {
-  if (item === nunsMovements["Standing-Still"]) {
+  if (item === nunsMovements["Still"]) {
     spaceInput.value = getPreviousEndSpace();
+    spaceInput.setAttribute("disabled", true);
 
     return;
   }
 
   // TODO - All the other cases
+  spaceInput.removeAttribute("disabled");
   spaceInput.value = "";
+  spaceInput.focus();
+}
+
+function replaceInputWithIcon(input) {
+  if (!input.className.includes("item") || input.value === "") {
+    return;
+  }
+
+  input.style.display = "none";
+
+  const staticItem = document.createElement("span");
+
+  if (input.value === nunsItems.Wish) {
+    staticItem.classList.add("material-symbols-outlined", "wish");
+    staticItem.textContent = "featured_seasonal_and_gifts";
+  } else if (input.value === nunsItems.Key) {
+    staticItem.classList.add("material-symbols-outlined", "key");
+    staticItem.textContent = "key";
+  }
+
+  input.parentElement.append(staticItem);
 }
 
 function getKeyByValue(object, value) {
-  return Object.keys(object)
-    .find((key) => object[key] === value)
-    .replace("-", " ");
+  return Object.keys(object).find((key) => object[key] === value);
 }
